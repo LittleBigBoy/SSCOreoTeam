@@ -1,0 +1,173 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Dashboard</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+        </div>
+        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar" class="align-text-bottom"></span>
+            This week
+        </button>
+    </div>
+</div>
+
+
+<div class="container-fluid pb-3">
+    <div class="d-grid gap-3" style="grid-template-columns: 1fr 1fr;">
+        <div class="bg-light border rounded-3">
+            <canvas id="myServiceChart"></canvas>
+        </div>
+        <div class="bg-light border rounded-3">
+            <canvas id="myDailyChartForService"></canvas>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    const ctx = document.getElementById('myServiceChart');
+
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Service2', 'Service3', 'Service4', 'Service5', 'Service6', 'Service7', 'Service8', 'Service9', 'Service10'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                borderWidth: 1,
+                backgroundColor: ['#CB4335', '#1F618D', '#F1C40F', '#27AE60', '#884EA0', '#D35400'],
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    onHover: handleHover,
+                    onLeave: handleLeave
+                }
+            }
+        }
+    });
+    function handleHover(evt, item, legend) {
+        legend.chart.data.datasets[0].backgroundColor.forEach((color, index, colors) => {
+            colors[index] = index === item.index || color.length === 9 ? color : color + '4D';
+        });
+        legend.chart.update();
+    }
+    function handleLeave(evt, item, legend) {
+        legend.chart.data.datasets[0].backgroundColor.forEach((color, index, colors) => {
+            colors[index] = color.length === 9 ? color.slice(0, -2) : color;
+        });
+        legend.chart.update();
+    }
+    /// 折线图
+    const ctx2 = document.getElementById('myDailyChartForService');
+    const DATA_COUNT = 7;
+    const NUMBER_CFG = { count: DATA_COUNT, min: -100, max: 100 };
+
+    const labels = Samples.utils.months({ count: 7 });
+    const data = {
+        labels: labels,
+        datasets: [
+            {
+                label: 'Service 1',
+                data: Samples.utils.numbers(NUMBER_CFG),
+                borderColor: Samples.utils.CHART_COLORS.red,
+                backgroundColor: Samples.utils.transparentize(Samples.utils.CHART_COLORS.red, 0.5),
+            },
+            {
+                label: 'Service 2',
+                data: Samples.utils.numbers(NUMBER_CFG),
+                borderColor: Samples.utils.CHART_COLORS.blue,
+                backgroundColor: Samples.utils.transparentize(Samples.utils.CHART_COLORS.blue, 0.5),
+            }
+        ]
+    };
+    
+    const actions = [
+        {
+            name: 'Randomize',
+            handler(chart) {
+                chart.data.datasets.forEach(dataset => {
+                    dataset.data = Samples.utils.numbers({ count: chart.data.labels.length, min: -100, max: 100 });
+                });
+                chart.update();
+            }
+        },
+        {
+            name: 'Add Dataset',
+            handler(chart) {
+                const data = chart.data;
+                const dsColor = Samples.namedColor(chart.data.datasets.length);
+                const newDataset = {
+                    label: 'Dataset ' + (data.datasets.length + 1),
+                    backgroundColor: Samples.utils.transparentize(dsColor, 0.5),
+                    borderColor: dsColor,
+                    data: Samples.utils.numbers({ count: data.labels.length, min: -100, max: 100 }),
+                };
+                chart.data.datasets.push(newDataset);
+                chart.update();
+            }
+        },
+        {
+            name: 'Add Data',
+            handler(chart) {
+                const data = chart.data;
+                if (data.datasets.length > 0) {
+                    data.labels = Samples.utils.months({ count: data.labels.length + 1 });
+
+                    for (let index = 0; index < data.datasets.length; ++index) {
+                        data.datasets[index].data.push(Samples.utils.rand(-100, 100));
+                    }
+
+                    chart.update();
+                }
+            }
+        },
+        {
+            name: 'Remove Dataset',
+            handler(chart) {
+                chart.data.datasets.pop();
+                chart.update();
+            }
+        },
+        {
+            name: 'Remove Data',
+            handler(chart) {
+                chart.data.labels.splice(-1, 1); // remove the label first
+
+                chart.data.datasets.forEach(dataset => {
+                    dataset.data.pop();
+                });
+
+                chart.update();
+            }
+        }
+    ];
+    const config = {
+        type: 'line',
+        data: data,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Daily Service'
+                }
+            }
+        },
+    };
+    new Chart(ctx2, config);
+    
+    
+ </script>
