@@ -1,0 +1,9 @@
+Client,Contribution,SharesHoldingPercentage,Portfolio,Service,AsOf
+ClientA,50000,5,Value Oriented,Equilties I,2023/7/1
+ClientA,65000,6.5,Growth Oriented,Equilties I,2023/7/1
+ClientA,70000,7,High Rating,Bonds I,2023/7/1
+ClientA,100000,10,Low Rating,Bonds I,2023/7/1
+ClientB,10000,1,Mixed,Equilties II,2023/7/1
+ClientB,200000,20,High Rating,Bonds I,2023/7/1
+ClientC,300000,30,Low Rating,Bonds I,2023/7/1
+ClientC,250000,25,Value Oriented,Equilties I,2023/7/1

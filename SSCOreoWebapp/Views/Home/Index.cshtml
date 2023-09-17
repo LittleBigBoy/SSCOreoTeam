@@ -1,7 +1,47 @@
 ﻿@{
     ViewData["Title"] = "Dashboard";
 }
+<style>
+    .pie-legend ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
 
+    .pie-legend span {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        border-radius: 100%;
+        margin-right: 16px;
+        margin-bottom: -2px;
+    }
+
+    .pie-legend li {
+        margin-bottom: 10px;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    canvas {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .table {
+        border: 1px solid red;
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    .cell {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    
+</style>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Dashboard</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
@@ -20,12 +60,23 @@
 <div class="container-fluid pb-3">
     <div class="d-grid gap-3" style="grid-template-columns: 1fr 1fr;">
         <div class="bg-light border rounded-3">
-            <canvas id="myServiceChart"></canvas>
+            <canvas id="myServiceChart" style="max-height: 400px;"></canvas>
         </div>
         <div class="bg-light border rounded-3">
             <canvas id="myDailyChartForService"></canvas>
         </div>
     </div>
+    @*<div class="d-grid gap-3" style="grid-template-columns: 1fr 1fr;">
+        <div class="bg-light border rounded-3">
+            <div class="cell">
+                <canvas id="top10ItemsChart" class="pie"></canvas>
+            </div>
+            <div class="cell" id="top10Legend"></div>
+        </div>
+        <div class="bg-light border rounded-3">
+            <canvas id="myDailyChartForService2"></canvas>
+        </div>
+    </div>*@
 </div>
 
 
@@ -33,28 +84,42 @@
 
 
 <script>
-    const ctx = document.getElementById('myServiceChart');
-
-    new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ['Service2', 'Service3', 'Service4', 'Service5', 'Service6', 'Service7', 'Service8', 'Service9', 'Service10'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                borderWidth: 1,
-                backgroundColor: ['#CB4335', '#1F618D', '#F1C40F', '#27AE60', '#884EA0', '#D35400'],
-            }]
-        },
-        options: {
-            plugins: {
-                legend: {
-                    onHover: handleHover,
-                    onLeave: handleLeave
-                }
-            }
-        }
-    });
+    $.ajax
+        ({
+            url: "/api/Portfolio",
+            dataType: "json",
+            type: "get",
+            data: {
+            },
+            success: function (res) {               
+                console.log(res);  //在console中查看数据
+                const ctx = document.getElementById('myServiceChart');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Service2', 'Service3', 'Service4', 'Service5', 'Service6', 'Service7', 'Service8', 'Service9', 'Service10'],
+                        datasets: [{
+                            label: '# of Votes',
+                            data: [12, 19, 3, 5, 2, 3, 0, 6, 9, 45],
+                            borderWidth: 1,
+                            backgroundColor: ['#CB4335', '#1F618D', '#F1C40F', '#27AE60', '#884EA0', '#D35400'],
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            legend: {
+                                onHover: handleHover,
+                                onLeave: handleLeave
+                            }
+                        }
+                    }
+                });
+            },
+            error: function (ex) {
+                alert('failed!');
+            },
+        });
+    
     function handleHover(evt, item, legend) {
         legend.chart.data.datasets[0].backgroundColor.forEach((color, index, colors) => {
             colors[index] = index === item.index || color.length === 9 ? color : color + '4D';
@@ -169,5 +234,62 @@
     };
     new Chart(ctx2, config);
     
+    /// pie 2
+    //var dataPie = [{
+    //    value: 2755,
+    //    color: "#FFE135",
+    //    label: "Bananas"
+    //}, {
+    //    value: 2256,
+    //    color: "#3B5323",
+    //    label: "Lettuce, Romaine"
+    //}, {
+    //    value: 1637,
+    //    color: "#fc6c85",
+    //    label: "Melons, Watermelon"
+    //}, {
+    //    value: 1608,
+    //    color: "#ffec89",
+    //    label: "Pineapple"
+    //}, {
+    //    value: 1603,
+    //    color: "#021c3d",
+    //    label: "Berries"
+    //}, {
+    //    value: 1433,
+    //    color: "#3B5323",
+    //    label: "Lettuce, Spring Mix"
+    //}, {
+    //    value: 1207,
+    //    color: "#046b00",
+    //    label: "Broccoli"
+    //}, {
+    //    value: 1076,
+    //    color: "#cef45a",
+    //    label: "Melons, Honeydew"
+    //}, {
+    //    value: 1056,
+    //    color: "#421C52",
+    //    label: "Grapes"
+    //}, {
+    //    value: 1048,
+    //    color: "#FEA620",
+    //    label: "Melons, Cantaloupe"
+    //}];
+
+    //var optionsPie = {
+    //    responsive: true,
+    //    scaleBeginAtZero: true,
+    //    legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
+    //}
+
+    //var ctx3 = $("#top10ItemsChart").get(0).getContext("2d");
+    //var top10PieChart = new Chart(ctx3,{
+    //    type:'pie',
+    //    data:dataPie,
+    //    options: optionsPie
+    //});
+    //$("#top10Legend").html(top10PieChart.update());
     
- </script>
+ 
+</script>

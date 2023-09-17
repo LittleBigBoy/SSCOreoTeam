@@ -63,7 +63,8 @@
             -webkit-overflow-scrolling: touch;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/chart.js"></script>
     <script src="~/js/utils.js"></script>
 </head>
 <body>
@@ -116,10 +117,28 @@
     </div>
   
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
     <script src="~/assets/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+<script>
+    $.ajax
+        ({
+            url: "/api/Client",
+            dataType: "json",
+            type: "get",
+            data: {
+            },
+            success: function (res) {
+                console.log(res);  //在console中查看数据
+                
+            },
+            error: function (ex) {
+                alert('failed!');
+            },
+        });
+
+</script>
