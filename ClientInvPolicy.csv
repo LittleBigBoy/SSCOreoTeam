@@ -1,4 +1,4 @@
-Client,SharpRatio,AllowBonds,MaxAceptedDrawdownPercentage,VAR,CVAR,Horizon
-ClientA,0.5,TRUE,40,,,10
-ClientB,0.7,TRUE,15,,,5
-ClientC,1,TRUE,10,,,10
+Client,SharpeRatio,AllowBonds,MaxAceptedDrawdownPercentage,VAR,CVAR,Horizon,RequiredReturnRate
+ClientA,0.5,TRUE,40,,,10,4
+ClientB,0.7,TRUE,15,,,5,5
+ClientC,1,TRUE,10,,,10,6
