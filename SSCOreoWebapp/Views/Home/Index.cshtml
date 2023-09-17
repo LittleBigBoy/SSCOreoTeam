@@ -48,9 +48,9 @@
         <div class="btn-group me-2">
             <a class="btn btn-sm btn-outline-secondary dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">ClientA</a>
             <ul class="dropdown-menu" id="clientlist">
-                <li><a class="dropdown-item" href="#">ClientA</a></li>
-                <li><a class="dropdown-item" href="#">ClientB</a></li>
-                <li><a class="dropdown-item" href="#">ClientC</a></li>
+                <li><a class="dropdown-item" onclick='initPage("ClientA")'>ClientA</a></li>
+                <li><a class="dropdown-item" onclick='initPage("ClientB")'>ClientB</a></li>
+                <li><a class="dropdown-item" onclick='initPage("ClientC")'>ClientC</a></li>
             </ul>
         </div>
         <div class="nav-item dropdown">
@@ -67,9 +67,10 @@
 
 <div class="container-fluid pb-3">
     <div class="d-grid gap-3" style="grid-template-columns: 1fr 1fr;" id="chartZone">
-        <div class="bg-light border rounded-3">
-            <canvas id="myServiceChart" style="max-height: 400px;"></canvas>
+        <div class="bg-light border rounded-3" id="myPie">
+            <canvas id="pieChart" style="max-height: 400px;"></canvas>
         </div>
+
     </div>
 </div>
 
@@ -93,75 +94,80 @@
                 alert('failed!');
             },
         });
-    
-
-    $.ajax
-        ({
-            url: "/api/Client/ClientA/portfolios",
-            dataType: "json",
-            type: "get",
-            data: {
-            },
-            success: function (res) { 
-                var labels = res.map(x => x.portfolioName + "(" + x.percentage+ ")");
-                var datas = res.map(x => x.portfolioData)
-                /// pie
-                const ctx = document.getElementById('myServiceChart');
-                new Chart(ctx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: "",
-                            data: datas,
-                            borderWidth: 1,
-                            backgroundColor: Samples.utils.defineColor,
-                        }]
-                    },
-                    options: {
-                        plugins: {
-                            legend: {
-                                onHover: handleHover,
-                                onLeave: handleLeave,
-                                onClick: handleClick
+    function initPage(client){
+        $.ajax
+            ({
+                url: '/api/Client/' + client + '/portfolios',
+                dataType: "json",
+                type: "get",
+                data: {
+                },
+                success: function (res) {
+                    var labels = res.map(x => x.portfolioName + "(" + x.percentage + ")");
+                    var datas = res.map(x => x.portfolioData)
+                    /// pie
+                    $("#myPie").empty();
+                    $("#myPie").append(' <canvas id="pieChart" style="max-height: 400px;"></canvas>')
+                    const ctx = document.getElementById('pieChart');
+                    new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: "",
+                                data: datas,
+                                borderWidth: 1,
+                                backgroundColor: Samples.utils.defineColor,
+                            }]
+                        },
+                        options: {
+                            plugins: {
+                                legend: {
+                                    onHover: handleHover,
+                                    onLeave: handleLeave,
+                                    onClick: handleClick
+                                }
                             }
                         }
-                    }
-                });
-                /// line
-                res.map(x => $("#chartZone").append('<div class="bg-light border rounded-3"><canvas id = "' + x.portfolioName.replace(/\s/g, "") + '" ></canvas></div>'));
-                
-                var dataRange = 7;
-                var dataContent='';
-                res.forEach((e, i) => {
-                    var data={};
-                    var dataSet = [];
-                    var portfolioData = e.data.slice(0 - dataRange);
-                    var navItem = {};
-                    navItem.label = 'NAV'                    
-                    navItem.data = portfolioData.map(x => x.nav);
-                    navItem.borderColor = Samples.utils.CHART_COLORS.red;
-                    navItem.backgroundColor = Samples.utils.transparentize(Samples.utils.CHART_COLORS.red, 0.5);
-                    navItem.yAxisID = 'y';
-                    dataSet.push(navItem);
-                    var returnItem = {};
-                    returnItem.label = 'Return'
-                    returnItem.data = portfolioData.map(x => x.return);
-                    returnItem.borderColor = Samples.utils.CHART_COLORS.blue;
-                    returnItem.backgroundColor = Samples.utils.transparentize(Samples.utils.CHART_COLORS.blue, 0.5);
-                    returnItem.yAxisID = 'y1';
-                    dataSet.push(returnItem);
-                    data.datasets = dataSet;
-                    data.labels = portfolioData.map(x => x.asOf);
-                    console.log(e.portfolioName.replace(/\s/g, ""));
-                    console.log(data);
-                    createLineChart(e.portfolioName.replace(/\s/g, ""), data);
-                });
-            },
-            error: function (ex) {
-                alert('failed! exception: '+ ex);
-            },
-        });
+                    });
+                    /// line
+                    $("#myPie").nextAll().remove();
+                    res.map(x => $("#chartZone").append('<div class="bg-light border rounded-3"><canvas id = "' + x.portfolioName.replace(/\s/g, "") + '" ></canvas></div>'));
+
+                    var dataRange = 7;
+                    var dataContent = '';
+                    res.forEach((e, i) => {
+                        var data = {};
+                        var dataSet = [];
+                        var portfolioData = e.data.slice(0 - dataRange);
+                        var navItem = {};
+                        navItem.label = 'NAV'
+                        navItem.data = portfolioData.map(x => x.nav);
+                        navItem.borderColor = Samples.utils.CHART_COLORS.red;
+                        navItem.backgroundColor = Samples.utils.transparentize(Samples.utils.CHART_COLORS.red, 0.5);
+                        navItem.yAxisID = 'y';
+                        dataSet.push(navItem);
+                        var returnItem = {};
+                        returnItem.label = 'Return'
+                        returnItem.data = portfolioData.map(x => x.return);
+                        returnItem.borderColor = Samples.utils.CHART_COLORS.blue;
+                        returnItem.backgroundColor = Samples.utils.transparentize(Samples.utils.CHART_COLORS.blue, 0.5);
+                        returnItem.yAxisID = 'y1';
+                        dataSet.push(returnItem);
+                        data.datasets = dataSet;
+                        data.labels = portfolioData.map(x => x.asOf);
+                        console.log(e.portfolioName.replace(/\s/g, ""));
+                        console.log(data);
+                        createLineChart(e.portfolioName.replace(/\s/g, ""), data);
+                    });
+                },
+                error: function (ex) {
+                    alert('failed! exception: ' + ex);
+                },
+            });
+    }
+
+    
     function handleClick(evt, item, legend) {
         console.log(item)
     }
@@ -210,5 +216,5 @@
         };
         new Chart(ctxCom, config);
     }
-
+    initPage('ClientA')
 </script>
