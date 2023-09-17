@@ -39,13 +39,19 @@ namespace SSCOreoWebapp.Service.Service
                 var portfolioData = portfolioHistorySourceData.Where(p =>
                         p.Portfolio == clientAllocModel.Portfolio && p.AsOf > startDate && p.AsOf <= endDate)
                     .OrderBy(p => p.AsOf).Select(p => new PortfolioData()
-                        { NAV = p.NAV, Return = p.Return, AsOf = p.AsOf });
+                        { NAV = p.NAV, Return = p.Return, AsOf = p.AsOf.ToString("yyyy-MM-dd") });
                 item.Data = portfolioData.ToList();
 
                 item.PortfolioData = portfolioData.FirstOrDefault().NAV * clientAllocModel.SharesHoldingPercentage;
 
                 result.Add(item);
             }
+
+            var totalAmount = result.Sum(p => p.PortfolioData);
+            result.ForEach(t =>
+            {
+                t.Percentage = Math.Round(t.PortfolioData * 100 / totalAmount, 2) + "%";
+            });
             return result;
         }
     }

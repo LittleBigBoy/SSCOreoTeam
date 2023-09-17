@@ -123,6 +123,9 @@ window.chartColors = {
         CHART_COLORS: {
             red: 'red',
             blue:'Blue'
+        },
+        defineColor: function () {
+            return COLORS;
         }
 
 

@@ -20,6 +20,6 @@
     {
         public double NAV { get; set; }
         public double Return { get; set; }
-        public DateTime AsOf { get; set; }
+        public string AsOf { get; set; }
     }
 }

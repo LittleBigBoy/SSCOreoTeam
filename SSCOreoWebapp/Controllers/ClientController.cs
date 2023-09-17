@@ -20,7 +20,7 @@ namespace SSCOreoWebapp.Controllers
             return Ok(await _clientService.GetClients());
         }
 
-        [HttpGet("portfolios/{client}")]
+        [HttpGet("{client}/portfolios")]
         public async Task<IActionResult> GetPortfolios(string client)
         {
             return Ok(await _allocService.GetClientPortfolios(client));

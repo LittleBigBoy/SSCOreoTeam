@@ -52,7 +52,7 @@ namespace SSCOreoWebapp.Service.Service
                     var record = csv.GetRecord<PortfolioHistoryModel>();
                     if (record == null) continue;
                     var data = new PortfolioData()
-                        { NAV = record.NAV, Return = record.Return, AsOf = record.AsOf };
+                        { NAV = record.NAV, Return = record.Return, AsOf = record.AsOf.ToString("yyyy-MM-dd") };
                     if (result.ContainsKey(record.Service))
                     {
                         var portfolio = result[record.Service];
