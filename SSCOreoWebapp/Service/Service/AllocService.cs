@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SSCOreoWebapp.Models;
 using SSCOreoWebapp.Service.Interface;
+using System.Globalization;
 
 namespace SSCOreoWebapp.Service.Service
 {
@@ -40,15 +41,44 @@ namespace SSCOreoWebapp.Service.Service
                         p.Portfolio == clientAllocModel.Portfolio && p.AsOf > startDate && p.AsOf <= endDate)
                     .OrderBy(p => p.AsOf).Select(p => new PortfolioData()
                         { NAV = p.NAV, Return = p.Return, AsOf = p.AsOf.ToString("yyyy-MM-dd") });
-                for (var i = 0; i < portfolioData.Count(); i++)
+                if (frequence == "Future")
                 {
-                    if (i % int.Parse(frequence) == 0)
+                    var nav = new List<PortfolioData>();
+                    var month = DateTime.Now.Month;
+                    var year = DateTime.Now.Year;
+                    var navValue = 0d;
+                    for (var i = 1; i <= 6; i++)
                     {
-                        item.Data.Add(portfolioData.ElementAt(i));
+                        var yearTemp = year;
+                        if (month + i > 12)
+                            yearTemp += 1;
+                        navValue += 200000 + new Random(1015068).NextDouble();
+                        var r = new Random();
+                        var model = new PortfolioData()
+                        {
+                            AsOf = $"{yearTemp}/{month + i}/01",
+                            NAV = 1015068.37 + navValue,
+                            Return = r.NextDouble() * (4) + (-2d)
+                        };
+                        nav.Add(model);
                     }
+                    
+                    item.Data = nav;
                 }
+                else
+                {
+                    for (var i = 0; i < portfolioData.Count(); i++)
+                    {
+                        if (i % int.Parse(frequence) == 0)
+                        {
+                            item.Data.Add(portfolioData.ElementAt(i));
+                        }
+                    }
+                    
+                }
+                portfolioData = item.Data;
 
-                item.PortfolioData = portfolioData.FirstOrDefault().NAV * clientAllocModel.SharesHoldingPercentage;
+                item.PortfolioData = portfolioData.LastOrDefault().NAV * clientAllocModel.SharesHoldingPercentage;
 
                 result.Add(item);
             }

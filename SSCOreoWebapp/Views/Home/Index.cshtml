@@ -58,7 +58,7 @@
             <ul class="dropdown-menu" id="frequencelist">
                 <li><a class="dropdown-item" onclick='onFrequenceClick(7,"Each 7 days")'>Each 7 days</a></li>
                 <li><a class="dropdown-item" onclick='onFrequenceClick(30,"Each 30 days")'>Each 30 days</a></li>
-                <li><a class="dropdown-item" onclick='onFrequenceClick()'>Customize</a></li>
+                <li><a class="dropdown-item" onclick='onFrequenceClick("Future", "Future")'>Future</a></li>
             </ul>
         </div>
     </div>
@@ -88,7 +88,9 @@
             data: {
             },
             success: function (res) {
-               
+               console.log(res)
+                $("#clientlist").empty();
+                res.map(x => $("#clientlist").append('<li><a class="dropdown-item" onclick=\'onClientClick("'+ x +'")\'>'+ x +'</a></li>'));
             },
             error: function (ex) {
                 alert('failed!');
@@ -106,7 +108,7 @@
         var frequenceText = $("#frequenceText").data("frequence");
         if (frequence !== frequenceText){
             $("#frequenceText").html(text);
-            $("#frequenceText").attr("data-frequence", frequence);
+            $("#frequenceText").data("frequence", frequence);
             renderChart();
         }
     }
