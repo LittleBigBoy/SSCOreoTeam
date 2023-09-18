@@ -19,7 +19,7 @@ namespace SSCOreoWebapp.Service.Service
             _csvReadService = csvReadService;
         }
 
-        public async Task<IEnumerable<ClientPortfoliosResponse>> GetClientPortfolios(string client, DateTime? startDate = null,
+        public async Task<IEnumerable<ClientPortfoliosResponse>> GetClientPortfolios(string client, string frequence, DateTime? startDate = null,
             DateTime? endDate = null)
         {
             startDate = startDate ?? new DateTime(1970, 01, 01);
@@ -40,7 +40,13 @@ namespace SSCOreoWebapp.Service.Service
                         p.Portfolio == clientAllocModel.Portfolio && p.AsOf > startDate && p.AsOf <= endDate)
                     .OrderBy(p => p.AsOf).Select(p => new PortfolioData()
                         { NAV = p.NAV, Return = p.Return, AsOf = p.AsOf.ToString("yyyy-MM-dd") });
-                item.Data = portfolioData.ToList();
+                for (var i = 0; i < portfolioData.Count(); i++)
+                {
+                    if (i % int.Parse(frequence) == 0)
+                    {
+                        item.Data.Add(portfolioData.ElementAt(i));
+                    }
+                }
 
                 item.PortfolioData = portfolioData.FirstOrDefault().NAV * clientAllocModel.SharesHoldingPercentage;
 

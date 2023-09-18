@@ -46,19 +46,19 @@
     <h1 class="h2">Dashboard</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
-            <a class="btn btn-sm btn-outline-secondary dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">ClientA</a>
+            <a class="btn btn-sm btn-outline-secondary dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false" id="clientText">ClientA</a>
             <ul class="dropdown-menu" id="clientlist">
-                <li><a class="dropdown-item" onclick='initPage("ClientA")'>ClientA</a></li>
-                <li><a class="dropdown-item" onclick='initPage("ClientB")'>ClientB</a></li>
-                <li><a class="dropdown-item" onclick='initPage("ClientC")'>ClientC</a></li>
+                <li><a class="dropdown-item" onclick='onClientClick("ClientA")'>ClientA</a></li>
+                <li><a class="dropdown-item" onclick='onClientClick("ClientB")'>ClientB</a></li>
+                <li><a class="dropdown-item" onclick='onClientClick("ClientC")'>ClientC</a></li>
             </ul>
         </div>
-        <div class="nav-item dropdown">
-            <a class="btn btn-sm btn-outline-secondary dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Date Range</a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Last 7 days</a></li>
-                <li><a class="dropdown-item" href="#">Last 30 days</a></li>
-                <li><a class="dropdown-item" href="#">Customize</a></li>
+        <div>
+            <a class="btn btn-sm btn-outline-secondary dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false" id="frequenceText" data-frequence="7">Each 7 days</a>
+            <ul class="dropdown-menu" id="frequencelist">
+                <li><a class="dropdown-item" onclick='onFrequenceClick(7,"Each 7 days")'>Each 7 days</a></li>
+                <li><a class="dropdown-item" onclick='onFrequenceClick(30,"Each 30 days")'>Each 30 days</a></li>
+                <li><a class="dropdown-item" onclick='onFrequenceClick()'>Customize</a></li>
             </ul>
         </div>
     </div>
@@ -94,10 +94,28 @@
                 alert('failed!');
             },
         });
-    function initPage(client){
+    function onClientClick(client)
+    {
+        var clientText = $("#clientText").html();
+        if (client !== clientText){
+            $("#clientText").html(client);
+            renderChart();
+        }
+    }
+    function onFrequenceClick(frequence, text){
+        var frequenceText = $("#frequenceText").data("frequence");
+        if (frequence !== frequenceText){
+            $("#frequenceText").html(text);
+            $("#frequenceText").attr("data-frequence", frequence);
+            renderChart();
+        }
+    }
+    function renderChart() {
+        var client = $("#clientText").html();
+        var frequence = $("#frequenceText").data("frequence");
         $.ajax
             ({
-                url: '/api/Client/' + client + '/portfolios',
+                url: '/api/Client/' + client + '/frequence/' + frequence + '/portfolios',
                 dataType: "json",
                 type: "get",
                 data: {
@@ -139,7 +157,7 @@
                     res.forEach((e, i) => {
                         var data = {};
                         var dataSet = [];
-                        var portfolioData = e.data.slice(0 - dataRange);
+                        var portfolioData = e.data;
                         var navItem = {};
                         navItem.label = 'NAV'
                         navItem.data = portfolioData.map(x => x.nav);
@@ -156,9 +174,7 @@
                         dataSet.push(returnItem);
                         data.datasets = dataSet;
                         data.labels = portfolioData.map(x => x.asOf);
-                        console.log(e.portfolioName.replace(/\s/g, ""));
-                        console.log(data);
-                        createLineChart(e.portfolioName.replace(/\s/g, ""), data);
+                        createLineChart(e.portfolioName.replace(/\s/g, ""), data, e.portfolioName);
                     });
                 },
                 error: function (ex) {
@@ -178,7 +194,7 @@
         legend.chart.update();
     }
     
-    function createLineChart(elementId,data)
+    function createLineChart(elementId,data,title)
     {
         const ctxCom = document.getElementById(elementId);
         const config = {
@@ -192,7 +208,7 @@
                     },
                     title: {
                         display: true,
-                        text: 'Portfolio History'
+                        text: title
                     }
                 },
                 scales: {
@@ -216,5 +232,5 @@
         };
         new Chart(ctxCom, config);
     }
-    initPage('ClientA')
+    renderChart();
 </script>
