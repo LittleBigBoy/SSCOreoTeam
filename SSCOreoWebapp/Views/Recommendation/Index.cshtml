@@ -1,0 +1,110 @@
+﻿@{
+    ViewData["Title"] = "Recommendation Chat";
+}
+<link href="~/css/answer.css" rel="stylesheet" />
+<link href="~/css/questioninput.css" rel="stylesheet" />
+<link href="~/css/recommendation.css" rel="stylesheet" />
+<link href="~/css/commoncss.css" rel="stylesheet" />
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Recommendation Chat</h1>
+    
+</div>
+
+
+<div class="container-fluid pb-3" style="display: flex">
+    <div class="_container_onjb8_1" role="main" style="height: calc(93vh - 100px); flex-grow: 1;">
+        <div class="ms-Stack _chatRoot_onjb8_8 css-122">
+            <div class="_chatContainer_onjb8_18">
+                <div class="ms-Stack _chatEmptyState_onjb8_30 css-123" id="showtext">
+                    <img src="/assets/brand/Azure.svg" class="_chatIcon_onjb8_63" aria-hidden="true">
+                    <h1 class="_chatEmptyStateTitle_onjb8_38">Start chatting</h1>
+                    <h2 class="_chatEmptyStateSubtitle_onjb8_50">This chatbot is configured to answer your questions</h2>
+                </div>
+                <div class="_chatMessageStream_onjb8_68" role="log" style="margin-bottom: 0px; display: none" id="chatpart">
+                    
+                    <div></div>
+                </div>
+
+                <div class="ms-Stack _chatInput_onjb8_137">
+                    
+                    <div class="ms-Stack _questionInputContainer_pe9s7_1 css-122">
+                        <div class="ms-TextField ms-TextField--multiline ms-TextField--borderless _questionInputTextArea_pe9s7_13 root-138">
+                            <div class="ms-TextField-wrapper">
+                                <div class="ms-TextField-fieldGroup fieldGroup-139">
+                                    <textarea id="TextField21"
+                                              class="ms-TextField-field ms-TextField--unresizable field-140" placeholder="Type a new question..."
+                                              aria-invalid="false"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="_questionInputSendButtonContainer_pe9s7_22" role="button" tabindex="0"
+                             aria-label="Ask question button" id="questionbutton">
+                            <svg class="_questionInputSendButtonDisabled_pe9s7_33 ___12fm75w_v8ls9a0 f1w7gpdv fez10in fg4l7m0"
+                                 fill="currentColor" aria-hidden="true" width="1em" height="1em" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2.18 2.11a.5.5 0 0 1 .54-.06l15 7.5a.5.5 0 0 1 0 .9l-15 7.5a.5.5 0 0 1-.7-.58L3.98 10 2.02 2.63a.5.5 0 0 1 .16-.52Zm2.7 8.39-1.61 6.06L16.38 10 3.27 3.44 4.88 9.5h6.62a.5.5 0 1 1 0 1H4.88Z"
+                                      fill="currentColor"></path>
+                            </svg>
+                        </div>
+                        <div class="_questionInputBottomBorder_pe9s7_41"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#TextField21").on("input", function (e) {
+        $("#TextField21").val($("#TextField21").val().replace(/[\r\n]/g, ""));
+        if ($("#TextField21").val() ===""){
+            $("#questionbutton").empty();
+            $("#questionbutton").append('<svg class="_questionInputSendButtonDisabled_pe9s7_33 ___12fm75w_v8ls9a0 f1w7gpdv fez10in fg4l7m0" fill="currentColor" aria-hidden="true" width="1em" height="1em" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.18 2.11a.5.5 0 0 1 .54-.06l15 7.5a.5.5 0 0 1 0 .9l-15 7.5a.5.5 0 0 1-.7-.58L3.98 10 2.02 2.63a.5.5 0 0 1 .16-.52Zm2.7 8.39-1.61 6.06L16.38 10 3.27 3.44 4.88 9.5h6.62a.5.5 0 1 1 0 1H4.88Z" fill="currentColor"></path></svg>')
+        }
+        else{
+            $("#questionbutton").empty();
+            $("#questionbutton").append('<img src="/assets/brand/Send.svg" class="_questionInputSendButton_pe9s7_22">')
+        }
+    });
+    
+    document.onkeydown = function (e) {
+        var ev = document.all ? window.event : e;
+        if (ev.keyCode == 13 && $("#TextField21").is(":focus") && $.trim($("#TextField21").val()) !== "") {
+            GetAnswer()
+        }
+    }
+    $("#questionbutton").click(function () {
+        GetAnswer()
+    })
+    function GetAnswer(){
+        $("#showtext").hide();
+        $("#chatpart").show();
+        var query = $("#TextField21").val();
+        if ($.trim($("#TextField21").val()) == "")
+            return;
+        $("#chatpart").append('<div class="_chatMessageUser_onjb8_80" tabindex="0"><div class= "_chatMessageUserMessage_onjb8_86" >' + query + '</div></div>');
+        $("#TextField21").val("");
+        $("#questionbutton").empty();
+        $("#questionbutton").append('<svg class="_questionInputSendButtonDisabled_pe9s7_33 ___12fm75w_v8ls9a0 f1w7gpdv fez10in fg4l7m0" fill="currentColor" aria-hidden="true" width="1em" height="1em" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.18 2.11a.5.5 0 0 1 .54-.06l15 7.5a.5.5 0 0 1 0 .9l-15 7.5a.5.5 0 0 1-.7-.58L3.98 10 2.02 2.63a.5.5 0 0 1 .16-.52Zm2.7 8.39-1.61 6.06L16.38 10 3.27 3.44 4.88 9.5h6.62a.5.5 0 1 1 0 1H4.88Z" fill="currentColor"></path></svg>')
+
+        $("#TextField21").attr('disabled', "disabled");
+        $.ajax
+            ({
+                url: "/api/Chat",
+                dataType: "json",
+                type: "get",
+                data: {
+                    q: query
+                },
+                success: function (res) {
+                    $("#chatpart").append('<div class="_chatMessageError_onjb8_110"><span class= "_chatMessageErrorContent_onjb8_125">' + res.data + '</span></div>');
+                    $("#TextField21").removeAttr("disabled");
+                },
+                error: function (ex) {
+                    alert('failed!');
+                },
+            });
+    }
+
+
+</script>

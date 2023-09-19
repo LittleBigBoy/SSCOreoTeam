@@ -67,16 +67,16 @@
     <script src="~/js/chart.js"></script>
     <script src="~/js/utils.js"></script>
 </head>
-<body>
+<body style="height: 100vh">
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Oreo - SSC</a>
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
+    <div class="form-control form-control-dark w-100 rounded-0 border-0"></div>
     <div class="navbar-nav">
         <div class="nav-item text-nowrap">
-            <a class="nav-link px-3" href="#">Sign out</a>
+            
         </div>
     </div>
 </header>
@@ -87,18 +87,17 @@
                 <div class="position-sticky pt-3 sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">
+                            <a class="nav-link active" aria-current="page" href="/" id="home">
                                 <span data-feather="Clients Report" class="align-text-bottom"></span>
                                 Clients Report
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
+                        <li class="nav-item" onclick="setActive(this)" >
+                            <a class="nav-link" href="/Recommendation" id="recommendation">
                                 <span data-feather="file" class="align-text-bottom"></span>
-                                Services Report
+                                Recommendation Chat
                             </a>
                         </li>
-                        
                     </ul>
                  </div>
                     
@@ -119,6 +118,13 @@
 </body>
 </html>
 <script>
-
+    if (window.location.pathname.indexOf("Recommendation") > 0){
+        $("#home").removeClass("active")
+        $("#recommendation").addClass("active")
+    }
+    else{
+        $("#home").addClass("active")
+        $("#recommendation").removeClass("active")
+    }
 
 </script>

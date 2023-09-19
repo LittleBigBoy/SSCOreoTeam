@@ -2,6 +2,7 @@
 using SSCOreoWebapp.Models;
 using SSCOreoWebapp.Service.Interface;
 using System.Globalization;
+using System.Net.Http.Headers;
 
 namespace SSCOreoWebapp.Service.Service
 {
@@ -23,6 +24,7 @@ namespace SSCOreoWebapp.Service.Service
         public async Task<IEnumerable<ClientPortfoliosResponse>> GetClientPortfolios(string client, string frequence, DateTime? startDate = null,
             DateTime? endDate = null)
         {
+           // await GetPredictValue();
             startDate = startDate ?? new DateTime(1970, 01, 01);
             endDate = endDate ?? DateTime.Now;
             var clientAllocPath = _configuration["AppSettings:ClientAllocFilePath"];
@@ -41,7 +43,7 @@ namespace SSCOreoWebapp.Service.Service
                         p.Portfolio == clientAllocModel.Portfolio && p.AsOf > startDate && p.AsOf <= endDate)
                     .OrderBy(p => p.AsOf).Select(p => new PortfolioData()
                         { NAV = p.NAV, Return = p.Return, AsOf = p.AsOf.ToString("yyyy-MM-dd") });
-                if (frequence == "Future")
+                if (frequence == "Prediction 6 month")
                 {
                     var nav = new List<PortfolioData>();
                     var month = DateTime.Now.Month;
@@ -89,6 +91,51 @@ namespace SSCOreoWebapp.Service.Service
                 t.Percentage = Math.Round(t.PortfolioData * 100 / totalAmount, 2) + "%";
             });
             return result;
+        }
+
+        private async Task GetPredictValue()
+        {
+            try
+            {
+                var client = new HttpClient();
+                var requestBody = @"{
+    ""input_data"":{
+    ""columns"":[
+        ""Service"",
+        ""Portfolio"",
+        ""AsOf""
+        ],
+        ""index"":[],
+        ""data"":[[""Equilties I"",""Value Oriented"",""2823/9/1""]]
+        }
+    }";
+                const string apikey = "BWWg6NSyVSIifaqJEue79lTGDk1IA00C";
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apikey);
+                client.BaseAddress = new Uri("https://oreo-ml-2023-port-prediction.eastasia.inference.ml.azure.com/score");
+                var content = new StringContent(requestBody);
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                content.Headers.Add("azureml-model-deployment", "portfoliopredictionmodel-1");
+                HttpResponseMessage reponse = await client.PostAsync("", content);
+
+                if (reponse.IsSuccessStatusCode)
+                {
+                    string result = await reponse.Content.ReadAsStringAsync();
+                    Console.WriteLine(result);
+                }
+                else
+                {
+                    Console.WriteLine(reponse.StatusCode);
+                    Console.WriteLine(reponse.Headers.ToString());
+                    string reponsecontent = await reponse.Content.ReadAsStringAsync();
+                    Console.WriteLine(reponsecontent);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
         }
     }
 }

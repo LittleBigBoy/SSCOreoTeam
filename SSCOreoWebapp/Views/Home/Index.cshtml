@@ -43,7 +43,7 @@
     
 </style>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Dashboard</h1>
+    <h1 class="h2">Client Report</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
             <a class="btn btn-sm btn-outline-secondary dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false" id="clientText">ClientA</a>
@@ -56,9 +56,9 @@
         <div>
             <a class="btn btn-sm btn-outline-secondary dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false" id="frequenceText" data-frequence="7">Each 7 days</a>
             <ul class="dropdown-menu" id="frequencelist">
-                <li><a class="dropdown-item" onclick='onFrequenceClick(7,"Each 7 days")'>Each 7 days</a></li>
-                <li><a class="dropdown-item" onclick='onFrequenceClick(30,"Each 30 days")'>Each 30 days</a></li>
-                <li><a class="dropdown-item" onclick='onFrequenceClick("Future", "Future")'>Future</a></li>
+                <li><a class="dropdown-item" onclick='onFrequenceClick(7,"Sampling each 7 days")'>Sampling each 7 days</a></li>
+                <li><a class="dropdown-item" onclick='onFrequenceClick(30,"Sampling each 30 days")'>Sampling each 30 days</a></li>
+                <li><a class="dropdown-item" onclick='onFrequenceClick("Prediction 6 month", "Prediction 6 month")'>Prediction 6 month</a></li>
             </ul>
         </div>
     </div>
@@ -88,7 +88,6 @@
             data: {
             },
             success: function (res) {
-               console.log(res)
                 $("#clientlist").empty();
                 res.map(x => $("#clientlist").append('<li><a class="dropdown-item" onclick=\'onClientClick("'+ x +'")\'>'+ x +'</a></li>'));
             },
@@ -163,16 +162,22 @@
                         var navItem = {};
                         navItem.label = 'NAV'
                         navItem.data = portfolioData.map(x => x.nav);
-                        navItem.borderColor = Samples.utils.CHART_COLORS.red;
-                        navItem.backgroundColor = Samples.utils.transparentize(Samples.utils.CHART_COLORS.red, 0.5);
+                        navItem.borderColor = '#87CEFA';
+                        navItem.backgroundColor = '#87CEFA';
+                        navItem.cubicInterpolationMode = 'monotone';
+                        navItem.tension= 0.4;
+                        navItem.pointStyle = false;
                         navItem.yAxisID = 'y';
                         dataSet.push(navItem);
                         var returnItem = {};
                         returnItem.label = 'Return'
                         returnItem.data = portfolioData.map(x => x.return);
                         returnItem.borderColor = Samples.utils.CHART_COLORS.blue;
-                        returnItem.backgroundColor = Samples.utils.transparentize(Samples.utils.CHART_COLORS.blue, 0.5);
+                        returnItem.backgroundColor = Samples.utils.CHART_COLORS.blue;
+                        returnItem.cubicInterpolationMode = 'monotone';
+                        returnItem.tension = 0.4;
                         returnItem.yAxisID = 'y1';
+                        returnItem.pointStyle = false;
                         dataSet.push(returnItem);
                         data.datasets = dataSet;
                         data.labels = portfolioData.map(x => x.asOf);

@@ -1,0 +1,153 @@
+﻿a {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.css-122 {
+    display: flex;
+    flex-flow: row;
+    width: auto;
+    height: auto;
+    box-sizing: border-box;
+}
+
+    .css-122 > * {
+        text-overflow: ellipsis;
+    }
+
+.css-123 {
+    display: flex;
+    flex-flow: column;
+    width: auto;
+    height: auto;
+    box-sizing: border-box;
+}
+
+    .css-123 > * {
+        text-overflow: ellipsis;
+    }
+
+.css-129 {
+    -webkit-font-smoothing: antialiased;
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    font-family: FabricMDL2Icons-4;
+}
+
+.root-105 {
+    display: inline-block;
+}
+
+.root-124 {
+    outline: transparent;
+    position: relative;
+    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+    font-weight: 400;
+    border: none rgb(243, 242, 241);
+    border-radius: 0px;
+    box-sizing: border-box;
+    cursor: default;
+    display: inline-block;
+    padding: 0px 4px;
+    text-decoration: none;
+    text-align: center;
+    min-width: 40px;
+    color: rgb(161, 159, 157);
+    background: rgb(189, 189, 189);
+    user-select: none;
+}
+
+    .root-124 .ms-Button-icon {
+        color: rgb(200, 198, 196);
+    }
+
+.root-138 {
+    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+    font-weight: 400;
+    box-shadow: none;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.icon-125 {
+    font-size: 16px;
+    margin: 0px 4px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    flex-shrink: 0;
+    color: rgb(161, 159, 157);
+}
+
+.css-129 {
+    -webkit-font-smoothing: antialiased;
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    font-family: FabricMDL2Icons-4;
+}
+
+.flexContainer-113 {
+    display: flex;
+    height: 100%;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.fieldGroup-139 {
+    box-shadow: none;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 2px;
+    background: rgb(255, 255, 255);
+    cursor: text;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    position: relative;
+    min-height: 60px;
+}
+
+.field-140 {
+    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+    font-weight: 400;
+    box-shadow: none;
+    margin: 0px;
+    padding: 6px 8px;
+    box-sizing: border-box;
+    border-radius: 0px;
+    border: none;
+    background: none transparent;
+    color: rgb(50, 49, 48);
+    width: 100%;
+    min-width: 0px;
+    text-overflow: ellipsis;
+    outline: 0px;
+    resize: none;
+    min-height: inherit;
+    line-height: 17px;
+    flex-grow: 1;
+    overflow: auto;
+}
+
+.fez10in {
+    line-height: 0;
+}
+
+
+.f1w7gpdv {
+    display: inline;
+}

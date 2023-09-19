@@ -1,0 +1,303 @@
+﻿
+._container_onjb8_1 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+}
+
+._chatRoot_onjb8_8 {
+    flex: 1;
+    display: flex;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    gap: 5px;
+}
+
+._chatContainer_onjb8_18 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: radial-gradient(108.78% 108.78% at 50.02% 19.78%, #FFFFFF 57.29%, #EEF6FE 100%);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.14), 0px 0px 2px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    overflow-y: auto;
+    max-height: calc(100vh - 100px);
+}
+
+._chatEmptyState_onjb8_30 {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+._chatEmptyStateTitle_onjb8_38 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    line-height: 24px;
+    margin-top: 36px;
+    margin-bottom: 0px;
+}
+
+._chatEmptyStateSubtitle_onjb8_50 {
+    margin-top: 20px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    letter-spacing: -0.01em;
+    color: #616161;
+}
+
+._chatIcon_onjb8_63 {
+    height: 62px;
+    width: 62px;
+}
+
+._chatMessageStream_onjb8_68 {
+    flex-grow: 1;
+    max-width: 1028px;
+    width: 100%;
+    overflow-y: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+}
+
+._chatMessageUser_onjb8_80 {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+}
+
+._chatMessageUserMessage_onjb8_86 {
+    padding: 20px;
+    background: #EDF5FD;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.14), 0px 0px 2px rgba(0, 0, 0, 0.12);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: #242424;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-width: 800px;
+}
+
+._chatMessageGpt_onjb8_104 {
+    margin-bottom: 12px;
+    max-width: 80%;
+    display: flex;
+}
+
+._chatMessageError_onjb8_110 {
+    padding: 20px;
+    /* background: #EDF5FD; */
+    border-radius: 8px;
+    box-shadow: rgba(188, 188, 194, 1) 1px 1px 2px, rgba(182, 52, 67, 1) 0px 0px 1px;
+    color: #242424;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    max-width: 800px;
+    /* filter: drop-shadow(rgba(182, 52, 67, 1) 1px 1px 2px) drop-shadow(rgba(182, 52, 67, 1) 0px 0px 1px); */
+}
+
+._chatMessageErrorContent_onjb8_125 {
+    font-family: "Segoe UI";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    word-wrap: break-word;
+    gap: 12px;
+    align-items: center;
+}
+
+._chatInput_onjb8_137 {
+    position: sticky;
+    flex: 0 0 100px;
+    padding-top: 12px;
+    padding-bottom: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+    width: calc(100% - 100px);
+    max-width: 1028px;
+    margin-bottom: 50px;
+    margin-top: 8px;
+}
+
+._clearChatBroom_onjb8_150 {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: 7px;
+    top: 13px;
+    color: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+._clearChatBroomNoCosmos_onjb8_167 {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: 7px;
+    top: 66px;
+    color: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+._newChatIcon_onjb8_184 {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: 7px;
+    top: 66px;
+    color: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+._stopGeneratingContainer_onjb8_201 {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 16px;
+    gap: 4px;
+    position: absolute;
+    width: 161px;
+    height: 32px;
+    left: calc(50% - 161px/2 + 25.8px);
+    bottom: 116px;
+    border: 1px solid #D1D1D1;
+    border-radius: 16px;
+}
+
+._stopGeneratingIcon_onjb8_218 {
+    width: 14px;
+    height: 14px;
+    color: #424242;
+}
+
+._stopGeneratingText_onjb8_224 {
+    width: 103px;
+    height: 20px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    color: #242424;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+._citationPanel_onjb8_239 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 16px;
+    gap: 8px;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.14), 0px 0px 2px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    flex: auto;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0.3;
+    max-width: 30%;
+    overflow-y: scroll;
+    max-height: calc(100vh - 100px);
+}
+
+._citationPanelHeaderContainer_onjb8_257 {
+    width: 100%;
+}
+
+._citationPanelHeader_onjb8_257 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    color: #000000;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+._citationPanelDismiss_onjb8_272 {
+    width: 18px;
+    height: 18px;
+    color: #424242;
+}
+
+    ._citationPanelDismiss_onjb8_272:hover {
+        background-color: #D1D1D1;
+        cursor: pointer;
+    }
+
+._citationPanelTitle_onjb8_283 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    color: #323130;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+._citationPanelContent_onjb8_293 {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #000000;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+
