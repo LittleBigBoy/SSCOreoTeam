@@ -11,6 +11,7 @@
         public double TotalServiceFee { get; set; }
         public double TotalServiceCost { get; set; }
         public double ProfitMargin { get; set; }
-        public string Score { get; set; }
+        public double Score { get; set; }
+        public double AdjustedScore { get; set; }
     }
 }

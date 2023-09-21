@@ -13,11 +13,12 @@
 
     .left-panel,
     .right-panel {
-        width: 45%;
-        min-height: 300px;
+        width: 48%;
+        min-height: 400px;
         border: 1px solid #ccc;
         padding: 10px;
         overflow-y: auto;
+        max-height: 400px;
     }
 
         .left-panel .serviceAmount{ display: none;}
@@ -50,8 +51,8 @@
     
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
-            <a class="btn btn-sm btn-outline-secondary dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false" id="clientText">ClientA</a>
-            <ul class="dropdown-menu" id="clientlist">
+            <a class="btn btn-sm btn-outline-secondary dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false" id="clientText">client1</a>
+            <ul class="dropdown-menu" id="clientlist" style="max-height: 500px;overflow-y: auto">
             </ul>
         </div>
     </div>
@@ -77,15 +78,79 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td><i class="bi bi-icon-name"></i>
+                            <td>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                    <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
                             </td>
-                            <td>Service 1</td>
-                            <td>1000</td>
+                            <td>Service 13</td>
+                                <td>Service 13</td>
                         </tr>
                         <tr>
+                            <td>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                    <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                            </td>
+                            <td>Service 21</td>
+                                <td>Service 21</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                            </td>
+                            <td>Service 47</td>
+                            <td>Service 47</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                            </td>
+                            <td>Service 56</td>
+                            <td>Service 561</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                            </td>
+                            <td>Service 58</td>
+                            <td>Service 58</td>
+                        </tr>
+                            <tr>
+                                <td>
+                                    <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                    <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                    <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                </td>
+                                <td>Service 74</td>
+                                <td>Service 74</td>
+                            </tr>
+                        <tr>
+                            <td>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                            </td>
                             <td>Service 12</td>
-                            <td>玩家2</td>
-                            <td>900</td>
+                            <td>Service 12</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                            </td>
+                            <td>Service 98</td>
+                            <td>Service 98</td>
                         </tr>
                         </tbody>
                     </table>
@@ -124,169 +189,6 @@
             </div>
     </div>
         
-    </div>
-<div class="container-fluid" style="margin-top:20px">
-        <div class="row" style="text-align: center;">
-            <div class="col-4" style="height: min-content;margin-top:20px">
-                <div class="card card-h-100">
-                    <div class="card-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12">
-                                    <h4 class="header-title mb-3">
-                                        <input class="form-check-input" type="checkbox" value="" data-service="service1" style="margin-right: 10px;margin-top: 2px;">
-                                        Top 1 - Service1
-                                    </h4>
-                                    <div class="table-responsive">
-                                        <table id="" class="myTable table mb-0 sortable">
-                                            <thead>
-                                            <tr>
-                                                <th>Place</th>
-                                                <td>Portfolio Name</td>
-                                                <td>Percentage</td>
-                                            </tr>
-                                            </thead>
-                                            <tbody align="center">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Portfolio1</td>
-                                                <td>25</td>
-                                            </tr>
-                                            <tr >
-                                                <td>2</td>
-                                                <td>Portfolio2</td>
-                                                <td>25</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-4" style="height: min-content;margin-top:20px">
-                <div class="card card-h-100">
-                    <div class="card-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12">
-                                    <h4 class="header-title mb-3">
-                                        <input class="form-check-input" type="checkbox" value="" data-service="service2" style="margin-right: 10px;margin-top: 2px;">
-                                        Top 2 - Service2
-                                    </h4>
-                                    <div class="table-responsive">
-                                        <table id="" class="myTable table mb-0 sortable">
-                                            <thead>
-                                            <tr>
-                                                <th>Place</th>
-                                                <td>Portfolio Name</td>
-                                                <td>Percentage</td>
-                                            </tr>
-                                            </thead>
-                                            <tbody align="center">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Portfolio1</td>
-                                                <td>25</td>
-                                            </tr>
-                                            <tr >
-                                                <td>2</td>
-                                                <td>Portfolio2</td>
-                                                <td>25</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-4" style="height: min-content;margin-top:20px">
-                <div class="card card-h-100">
-                    <div class="card-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12">
-                                    <h4 class="header-title mb-3">
-                                        <input class="form-check-input" type="checkbox" value="" data-service="service3" style="margin-right: 10px;margin-top: 2px;">
-                                        Top 3 - Service2
-                                    </h4>
-                                    <div class="table-responsive">
-                                        <table id="" class="myTable table mb-0 sortable">
-                                            <thead>
-                                            <tr>
-                                                <th>Place</th>
-                                                <td>Portfolio Name</td>
-                                                <td>Percentage</td>
-                                            </tr>
-                                            </thead>
-                                            <tbody align="center">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Portfolio1</td>
-                                                <td>25</td>
-                                            </tr>
-                                            <tr >
-                                                <td>2</td>
-                                                <td>Portfolio2</td>
-                                                <td>25</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-4" style="height: min-content;margin-top:20px">
-                <div class="card card-h-100">
-                    <div class="card-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12">
-                                    <h4 class="header-title mb-3">
-                                        <input class="form-check-input" type="checkbox" value="" data-service="service4" style="margin-right: 10px;margin-top: 2px;">
-                                        Top 4 - Service2
-                                    </h4>
-                                    <div class="table-responsive">
-                                        <table id="" class="myTable table mb-0 sortable">
-                                            <thead>
-                                            <tr>
-                                                <th>Place</th>
-                                                <td>Portfolio Name</td>
-                                                <td>Percentage</td>
-                                            </tr>
-                                            </thead>
-                                            <tbody align="center">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Portfolio1</td>
-                                                <td>25</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Portfolio2</td>
-                                                <td>25</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 <script src="~/js/randerservice.js"></script>

@@ -139,7 +139,9 @@ function calculateCustomizeService() {
                     return;
                 }
                 var labels = res.map(x => x.serviceName + "(" + x.amount + ")");
-                var datas = res.map(x => x.amount)
+                var totalAmount = 0
+                var datas = res.map(x => totalAmount = totalAmount+ x.amount)
+                console.log(totalAmount)
                 /// pie
                 $("#myCustomizePieChart").empty();
                 $("#myCustomizePieChart").append(' <canvas id="customizePieChart" style="max-height: 400px;"></canvas>')

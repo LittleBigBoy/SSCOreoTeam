@@ -1,4 +1,4 @@
-Client,RiskTolerance,Region,TotalInvestment,YearsOfInvestmentExperience,AnnualFeeRate,TotalServiceFee,TotalServiceCost,NetIncome,ProfitMargin,Service,AvgAnnualReturn,AnnualReturnVolatility,Liquidity,TotalValue,AvgAnnualFeeRate,TotalServiceFee,TotalServiceCost,ProfitMargin,Score,AdjustedScore,AllocPercent
+Client,RiskTolerance,Region,TotalInvestment,YearsOfInvestmentExperience,AnnualFeeRate,TotalServiceFee,TotalServiceCost,NetIncome,ProfitMargin,Service,AvgAnnualReturn,AnnualReturnVolatility,Liquidity,TotalValue,AvgAnnualFeeRate,ServiceTotalServiceFee,ServiceTotalServiceCost,ProfitMargin,Score,AdjustedScore,AllocPercent
 client9,high,East Asia,87147257.62,18,3.5,3050154.02,566457.17,2483696.85,81.43,service3,5.88,12.81,high,3124121780,4.73,147770960.2,106136894.7,28.17,213.0450506,8,8.71
 client9,high,East Asia,87147257.62,18,3.5,3050154.02,566457.17,2483696.85,81.43,service10,7.45,14.12,high,2834277620,4.51,127825920.7,89838256.99,29.72,278.3171634,10,6.79
 client9,high,East Asia,87147257.62,18,3.5,3050154.02,566457.17,2483696.85,81.43,service15,5.57,13.53,high,2957871397,2.56,75721507.76,49606496.93,34.49,199.3893749,7,8.61
