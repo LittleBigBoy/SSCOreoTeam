@@ -1,0 +1,984 @@
+{
+    "projectFileVersion": "2022-10-01-preview",
+    "stringIndexType": "Utf16CodeUnit",
+    "metadata": {
+        "projectKind": "Conversation",
+        "settings": {
+            "confidenceThreshold": 0,
+            "normalizeCasing": false
+        },
+        "projectName": "languageproject",
+        "multilingual": false,
+        "description": "",
+        "language": "en-us"
+    },
+    "assets": {
+        "projectKind": "Conversation",
+        "intents": [
+            {
+                "category": "None"
+            },
+            {
+                "category": "return greater than"
+            },
+            {
+                "category": "WhatIf"
+            }
+        ],
+        "entities": [
+            {
+                "category": "AssetAttribute",
+                "compositionSetting": "combineComponents"
+            },
+            {
+                "category": "CompareWith",
+                "compositionSetting": "combineComponents"
+            },
+            {
+                "category": "CompareAction",
+                "compositionSetting": "combineComponents"
+            },
+            {
+                "category": "CompareScope",
+                "compositionSetting": "combineComponents"
+            },
+            {
+                "category": "Peroid",
+                "compositionSetting": "combineComponents"
+            },
+            {
+                "category": "AssetPort",
+                "compositionSetting": "combineComponents"
+            },
+            {
+                "category": "AssetStock",
+                "compositionSetting": "combineComponents"
+            },
+            {
+                "category": "AseetBond",
+                "compositionSetting": "combineComponents"
+            },
+            {
+                "category": "SupposeTag",
+                "compositionSetting": "combineComponents"
+            },
+            {
+                "category": "PortName",
+                "compositionSetting": "combineComponents"
+            },
+            {
+                "category": "SupposeAdd",
+                "compositionSetting": "combineComponents"
+            },
+            {
+                "category": "SupposeReplace",
+                "compositionSetting": "combineComponents"
+            },
+            {
+                "category": "SupposeDelete",
+                "compositionSetting": "combineComponents"
+            },
+            {
+                "category": "SupposeReplaceBy",
+                "compositionSetting": "combineComponents"
+            }
+        ],
+        "utterances": [
+            {
+                "text": "how about the prediction if replace portfolio value oriented with growth oriented",
+                "language": "en-us",
+                "intent": "WhatIf",
+                "entities": [
+                    {
+                        "category": "SupposeTag",
+                        "offset": 0,
+                        "length": 27
+                    },
+                    {
+                        "category": "SupposeReplace",
+                        "offset": 28,
+                        "length": 7
+                    },
+                    {
+                        "category": "AssetPort",
+                        "offset": 36,
+                        "length": 9
+                    },
+                    {
+                        "category": "PortName",
+                        "offset": 46,
+                        "length": 14
+                    },
+                    {
+                        "category": "SupposeReplaceBy",
+                        "offset": 61,
+                        "length": 20
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "how about the prediction if replace portfolio low rating with value oriented to current position",
+                "language": "en-us",
+                "intent": "WhatIf",
+                "entities": [
+                    {
+                        "category": "SupposeTag",
+                        "offset": 0,
+                        "length": 27
+                    },
+                    {
+                        "category": "SupposeReplace",
+                        "offset": 28,
+                        "length": 7
+                    },
+                    {
+                        "category": "AssetPort",
+                        "offset": 36,
+                        "length": 9
+                    },
+                    {
+                        "category": "PortName",
+                        "offset": 46,
+                        "length": 10
+                    },
+                    {
+                        "category": "SupposeReplaceBy",
+                        "offset": 57,
+                        "length": 19
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "what's the expect return if add portfolio low rating, mixed and value oriented to current position",
+                "language": "en-us",
+                "intent": "WhatIf",
+                "entities": [
+                    {
+                        "category": "SupposeTag",
+                        "offset": 0,
+                        "length": 27
+                    },
+                    {
+                        "category": "SupposeAdd",
+                        "offset": 28,
+                        "length": 3
+                    },
+                    {
+                        "category": "AssetPort",
+                        "offset": 32,
+                        "length": 9
+                    },
+                    {
+                        "category": "PortName",
+                        "offset": 42,
+                        "length": 10
+                    },
+                    {
+                        "category": "PortName",
+                        "offset": 54,
+                        "length": 5
+                    },
+                    {
+                        "category": "PortName",
+                        "offset": 64,
+                        "length": 14
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "what the result if add the portfolio low rating",
+                "language": "en-us",
+                "intent": "WhatIf",
+                "entities": [
+                    {
+                        "category": "SupposeTag",
+                        "offset": 0,
+                        "length": 18
+                    },
+                    {
+                        "category": "SupposeAdd",
+                        "offset": 19,
+                        "length": 3
+                    },
+                    {
+                        "category": "AssetPort",
+                        "offset": 27,
+                        "length": 9
+                    },
+                    {
+                        "category": "PortName",
+                        "offset": 37,
+                        "length": 10
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "what's the return if delete the portfolio high rating",
+                "language": "en-us",
+                "intent": "WhatIf",
+                "entities": [
+                    {
+                        "category": "SupposeTag",
+                        "offset": 0,
+                        "length": 20
+                    },
+                    {
+                        "category": "SupposeDelete",
+                        "offset": 21,
+                        "length": 6
+                    },
+                    {
+                        "category": "AssetPort",
+                        "offset": 32,
+                        "length": 9
+                    },
+                    {
+                        "category": "PortName",
+                        "offset": 42,
+                        "length": 11
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "what's the return if replace the portfolio value oriented with the growth oriented",
+                "language": "en-us",
+                "intent": "WhatIf",
+                "entities": [
+                    {
+                        "category": "SupposeTag",
+                        "offset": 0,
+                        "length": 20
+                    },
+                    {
+                        "category": "SupposeReplace",
+                        "offset": 21,
+                        "length": 7
+                    },
+                    {
+                        "category": "AssetPort",
+                        "offset": 33,
+                        "length": 9
+                    },
+                    {
+                        "category": "PortName",
+                        "offset": 43,
+                        "length": 14
+                    },
+                    {
+                        "category": "SupposeReplaceBy",
+                        "offset": 58,
+                        "length": 24
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "What's the retrun if add portfolio mixed",
+                "language": "en-us",
+                "intent": "WhatIf",
+                "entities": [
+                    {
+                        "category": "SupposeTag",
+                        "offset": 0,
+                        "length": 20
+                    },
+                    {
+                        "category": "SupposeAdd",
+                        "offset": 21,
+                        "length": 3
+                    },
+                    {
+                        "category": "AssetPort",
+                        "offset": 25,
+                        "length": 9
+                    },
+                    {
+                        "category": "PortName",
+                        "offset": 35,
+                        "length": 5
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "which portfolio has the worst return in past 5 years",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "AssetPort",
+                        "offset": 6,
+                        "length": 9
+                    },
+                    {
+                        "category": "AssetAttribute",
+                        "offset": 24,
+                        "length": 12
+                    },
+                    {
+                        "category": "CompareScope",
+                        "offset": 37,
+                        "length": 7
+                    },
+                    {
+                        "category": "Peroid",
+                        "offset": 45,
+                        "length": 7
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "predict the bond with the best return in future",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "CompareScope",
+                        "offset": 0,
+                        "length": 7
+                    },
+                    {
+                        "category": "AseetBond",
+                        "offset": 12,
+                        "length": 4
+                    },
+                    {
+                        "category": "AssetAttribute",
+                        "offset": 26,
+                        "length": 11
+                    },
+                    {
+                        "category": "CompareScope",
+                        "offset": 38,
+                        "length": 9
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "bond has the predicted top 1 performance in furture 6 month",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "AseetBond",
+                        "offset": 0,
+                        "length": 4
+                    },
+                    {
+                        "category": "CompareScope",
+                        "offset": 13,
+                        "length": 9
+                    },
+                    {
+                        "category": "AssetAttribute",
+                        "offset": 23,
+                        "length": 17
+                    },
+                    {
+                        "category": "CompareScope",
+                        "offset": 41,
+                        "length": 10
+                    },
+                    {
+                        "category": "Peroid",
+                        "offset": 52,
+                        "length": 7
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "bond has the worst performance in past 3 month",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "AseetBond",
+                        "offset": 0,
+                        "length": 4
+                    },
+                    {
+                        "category": "AssetAttribute",
+                        "offset": 13,
+                        "length": 17
+                    },
+                    {
+                        "category": "CompareScope",
+                        "offset": 31,
+                        "length": 7
+                    },
+                    {
+                        "category": "Peroid",
+                        "offset": 39,
+                        "length": 7
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "portfolio with the top performance in future 1 year",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "AssetPort",
+                        "offset": 0,
+                        "length": 9
+                    },
+                    {
+                        "category": "AssetAttribute",
+                        "offset": 19,
+                        "length": 15
+                    },
+                    {
+                        "category": "CompareScope",
+                        "offset": 35,
+                        "length": 9
+                    },
+                    {
+                        "category": "Peroid",
+                        "offset": 45,
+                        "length": 6
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "portfolio has the best performance",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "AssetPort",
+                        "offset": 0,
+                        "length": 9
+                    },
+                    {
+                        "category": "AssetAttribute",
+                        "offset": 18,
+                        "length": 16
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "stock has the best return in future 4 month",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "AssetStock",
+                        "offset": 0,
+                        "length": 5
+                    },
+                    {
+                        "category": "AssetAttribute",
+                        "offset": 14,
+                        "length": 11
+                    },
+                    {
+                        "category": "CompareScope",
+                        "offset": 26,
+                        "length": 9
+                    },
+                    {
+                        "category": "Peroid",
+                        "offset": 36,
+                        "length": 7
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "stock has the best return",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "AssetStock",
+                        "offset": 0,
+                        "length": 5
+                    },
+                    {
+                        "category": "AssetAttribute",
+                        "offset": 14,
+                        "length": 11
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "bond",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "AseetBond",
+                        "offset": 0,
+                        "length": 4
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "stock",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "AssetStock",
+                        "offset": 0,
+                        "length": 5
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "stock has return less than 10% ",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "AssetStock",
+                        "offset": 0,
+                        "length": 5
+                    },
+                    {
+                        "category": "AssetAttribute",
+                        "offset": 10,
+                        "length": 6
+                    },
+                    {
+                        "category": "CompareAction",
+                        "offset": 17,
+                        "length": 9
+                    },
+                    {
+                        "category": "CompareWith",
+                        "offset": 27,
+                        "length": 3
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "the performance of the stock with the return greater than 1% in history 6 month",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "AssetAttribute",
+                        "offset": 4,
+                        "length": 11
+                    },
+                    {
+                        "category": "AssetStock",
+                        "offset": 23,
+                        "length": 5
+                    },
+                    {
+                        "category": "AssetAttribute",
+                        "offset": 38,
+                        "length": 6
+                    },
+                    {
+                        "category": "CompareAction",
+                        "offset": 45,
+                        "length": 12
+                    },
+                    {
+                        "category": "CompareWith",
+                        "offset": 58,
+                        "length": 2
+                    },
+                    {
+                        "category": "CompareScope",
+                        "offset": 61,
+                        "length": 10
+                    },
+                    {
+                        "category": "Peroid",
+                        "offset": 72,
+                        "length": 7
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "the performance of stock and bond is lower than the benchmarck  ",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "AssetAttribute",
+                        "offset": 4,
+                        "length": 11
+                    },
+                    {
+                        "category": "AssetStock",
+                        "offset": 19,
+                        "length": 5
+                    },
+                    {
+                        "category": "AseetBond",
+                        "offset": 29,
+                        "length": 4
+                    },
+                    {
+                        "category": "CompareAction",
+                        "offset": 37,
+                        "length": 10
+                    },
+                    {
+                        "category": "CompareWith",
+                        "offset": 52,
+                        "length": 10
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "stock has return less than 1% in furure 1 month",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "AssetStock",
+                        "offset": 0,
+                        "length": 5
+                    },
+                    {
+                        "category": "AssetAttribute",
+                        "offset": 10,
+                        "length": 6
+                    },
+                    {
+                        "category": "CompareAction",
+                        "offset": 17,
+                        "length": 9
+                    },
+                    {
+                        "category": "CompareWith",
+                        "offset": 27,
+                        "length": 2
+                    },
+                    {
+                        "category": "CompareScope",
+                        "offset": 30,
+                        "length": 9
+                    },
+                    {
+                        "category": "Peroid",
+                        "offset": 40,
+                        "length": 7
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "portfolio performance is greater than 1% in future 3 month",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "AssetPort",
+                        "offset": 0,
+                        "length": 9
+                    },
+                    {
+                        "category": "AssetAttribute",
+                        "offset": 10,
+                        "length": 11
+                    },
+                    {
+                        "category": "CompareAction",
+                        "offset": 25,
+                        "length": 12
+                    },
+                    {
+                        "category": "CompareWith",
+                        "offset": 38,
+                        "length": 2
+                    },
+                    {
+                        "category": "CompareScope",
+                        "offset": 41,
+                        "length": 9
+                    },
+                    {
+                        "category": "Peroid",
+                        "offset": 51,
+                        "length": 7
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "history return is greater than 5% in past 6 month",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "CompareScope",
+                        "offset": 0,
+                        "length": 7
+                    },
+                    {
+                        "category": "AssetAttribute",
+                        "offset": 8,
+                        "length": 6
+                    },
+                    {
+                        "category": "CompareAction",
+                        "offset": 18,
+                        "length": 12
+                    },
+                    {
+                        "category": "CompareWith",
+                        "offset": 31,
+                        "length": 2
+                    },
+                    {
+                        "category": "Peroid",
+                        "offset": 42,
+                        "length": 7
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "performance is higher than 8% in past 5 years",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "AssetAttribute",
+                        "offset": 0,
+                        "length": 11
+                    },
+                    {
+                        "category": "CompareAction",
+                        "offset": 15,
+                        "length": 11
+                    },
+                    {
+                        "category": "CompareWith",
+                        "offset": 27,
+                        "length": 2
+                    },
+                    {
+                        "category": "Peroid",
+                        "offset": 38,
+                        "length": 7
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "portfolio has predicted return less than 10% 2 years from now",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "AssetPort",
+                        "offset": 0,
+                        "length": 9
+                    },
+                    {
+                        "category": "CompareScope",
+                        "offset": 14,
+                        "length": 9
+                    },
+                    {
+                        "category": "AssetAttribute",
+                        "offset": 24,
+                        "length": 6
+                    },
+                    {
+                        "category": "CompareAction",
+                        "offset": 31,
+                        "length": 9
+                    },
+                    {
+                        "category": "CompareWith",
+                        "offset": 41,
+                        "length": 3
+                    },
+                    {
+                        "category": "Peroid",
+                        "offset": 45,
+                        "length": 7
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "portfolio which can staisfy the requirement that return higher than 5% in future",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "AssetPort",
+                        "offset": 0,
+                        "length": 9
+                    },
+                    {
+                        "category": "AssetAttribute",
+                        "offset": 49,
+                        "length": 6
+                    },
+                    {
+                        "category": "CompareAction",
+                        "offset": 56,
+                        "length": 11
+                    },
+                    {
+                        "category": "CompareWith",
+                        "offset": 68,
+                        "length": 2
+                    },
+                    {
+                        "category": "CompareScope",
+                        "offset": 71,
+                        "length": 9
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "any portfolio has the predict return greater than 4%",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "AssetPort",
+                        "offset": 4,
+                        "length": 9
+                    },
+                    {
+                        "category": "CompareScope",
+                        "offset": 22,
+                        "length": 7
+                    },
+                    {
+                        "category": "AssetAttribute",
+                        "offset": 30,
+                        "length": 6
+                    },
+                    {
+                        "category": "CompareAction",
+                        "offset": 37,
+                        "length": 12
+                    },
+                    {
+                        "category": "CompareWith",
+                        "offset": 50,
+                        "length": 2
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "I want to know which portfolio may have a return greater than 5% in future",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "AssetPort",
+                        "offset": 21,
+                        "length": 9
+                    },
+                    {
+                        "category": "AssetAttribute",
+                        "offset": 42,
+                        "length": 6
+                    },
+                    {
+                        "category": "CompareAction",
+                        "offset": 49,
+                        "length": 12
+                    },
+                    {
+                        "category": "CompareWith",
+                        "offset": 62,
+                        "length": 2
+                    },
+                    {
+                        "category": "CompareScope",
+                        "offset": 65,
+                        "length": 9
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "portfolio return less than 10%",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "AssetPort",
+                        "offset": 0,
+                        "length": 9
+                    },
+                    {
+                        "category": "AssetAttribute",
+                        "offset": 10,
+                        "length": 6
+                    },
+                    {
+                        "category": "CompareAction",
+                        "offset": 17,
+                        "length": 9
+                    },
+                    {
+                        "category": "CompareWith",
+                        "offset": 27,
+                        "length": 3
+                    }
+                ],
+                "dataset": "Train"
+            },
+            {
+                "text": "portfolio predicted return rate greater than 1%",
+                "language": "en-us",
+                "intent": "return greater than",
+                "entities": [
+                    {
+                        "category": "AssetPort",
+                        "offset": 0,
+                        "length": 9
+                    },
+                    {
+                        "category": "CompareScope",
+                        "offset": 10,
+                        "length": 9
+                    },
+                    {
+                        "category": "AssetAttribute",
+                        "offset": 20,
+                        "length": 6
+                    },
+                    {
+                        "category": "CompareAction",
+                        "offset": 32,
+                        "length": 12
+                    },
+                    {
+                        "category": "CompareWith",
+                        "offset": 45,
+                        "length": 2
+                    }
+                ],
+                "dataset": "Train"
+            }
+        ]
+    }
+}
