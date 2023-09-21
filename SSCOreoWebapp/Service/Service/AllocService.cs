@@ -88,6 +88,39 @@ namespace SSCOreoWebapp.Service.Service
             return result;
         }
 
+        public List<ClientServiceResponseModel> GetCustomizeService(List<ClientServiceResponseModel> serviceModels)
+        {
+            var result = new List<ClientServiceResponseModel>();
+            var serviceProfilePath = _configuration["AppSettings:ServiceProfileFilePath"];
+            var sourceDatas = _csvReadService.GetCsvData<ServiceProfileModel>("ServiceProfileFilePath", serviceProfilePath);
+            serviceModels.ForEach(t =>
+            {
+                var serviceProfile = new ClientServiceResponseModel();
+                var service = sourceDatas.FirstOrDefault(p => p.Service == t.ServiceName);
+                if (service == null)
+                {
+                    return;
+                }
+
+                serviceProfile.ServiceName = t.ServiceName;
+                serviceProfile.Amount = Math.Round(t.Amount * service.AvgAnnualFeeRate * service.ProfitMargin / 10000, 2);
+                result.Add(serviceProfile);
+            });
+            var totalAmount = result.Sum(p => p.Amount);
+            result.ForEach(t =>
+            {
+                t.Percentage = Math.Round(t.Amount * 100 / totalAmount, 2) + "%";
+            });
+            return result;
+        }
+
+        public List<string> GetAllServices()
+        {
+            var serviceProfilePath = _configuration["AppSettings:ServiceProfileFilePath"];
+            var sourceDatas = _csvReadService.GetCsvData<ServiceProfileModel>("ServiceProfileFilePath", serviceProfilePath);
+            return sourceDatas.Select(p => p.Service).Distinct().ToList();
+        }
+
         private async Task GetPredictValue()
         {
             try

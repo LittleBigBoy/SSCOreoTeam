@@ -20,6 +20,17 @@ namespace SSCOreoWebapp.Controllers
             return Ok(await _clientService.GetClients());
         }
 
+        [HttpGet("serviceClients")]
+        public IActionResult GetServiceClients()
+        {
+            return Ok(_clientService.GetServiceClients());
+        }
+        [HttpGet("{clientName}/services")]
+        public IActionResult GetServicesByClientName(string clientName)
+        {
+            return Ok(_clientService.GetServicesByClientName(clientName));
+        }
+
         [HttpGet("{client}/frequence/{frequence}/portfolios")]
         public async Task<IActionResult> GetPortfolios(string client, string frequence)
         {

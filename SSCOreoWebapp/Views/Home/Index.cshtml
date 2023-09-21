@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Client Report";
+    ViewData["Title"] = "Oreo Service";
 }
 <style>
     .pie-legend ul {
@@ -42,15 +42,22 @@
 
     
 </style>
+<link href="~/css/chatbox.css" rel="stylesheet" />
+<script src="~/js/chatbox.js"></script>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Client Report</h1>
+    <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Client Report</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Recommendation</a>
+        </li>
+    </ul>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
             <a class="btn btn-sm btn-outline-secondary dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false" id="clientText">ClientA</a>
             <ul class="dropdown-menu" id="clientlist">
-                <li><a class="dropdown-item" onclick='onClientClick("ClientA")'>ClientA</a></li>
-                <li><a class="dropdown-item" onclick='onClientClick("ClientB")'>ClientB</a></li>
-                <li><a class="dropdown-item" onclick='onClientClick("ClientC")'>ClientC</a></li>
+                
             </ul>
         </div>
         <div>
@@ -70,31 +77,78 @@
         <div class="bg-light border rounded-3" id="myPie">
             <canvas id="pieChart" style="max-height: 400px;"></canvas>
         </div>
+    </div>
+</div>
 
+<div class="modal " id="chatModal">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-body" id="myPortfolioChart">
+                <canvas id="portfolioChart" style="max-height: 400px;"></canvas>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="chatbot-toggler">
+    <span class="material-symbols-outlined">mode_comment</span>
+    <span class="material-symbols-outlined">close</span>
+</button>
+<div class="chatbot">
+    <header>
+        <h2>Chatbot</h2>
+        <span class="close-btn material-symbols-outlined">close</span>
+    </header>
+    <ul class="chatbox">
+        <li class="chat incoming">
+            <span class="material-symbols-outlined">smart_toy</span>
+            <p>Hi there <br> How can I help you today?</p>
+        </li>
+
+    </ul>
+    <div class="chat-input">
+        <textarea placeholder="Enter a msg" required></textarea>
+        <span id="send-btn" class="material-symbols-outlined"><svg class="_questionInputSendButtonDisabled_pe9s7_33 ___12fm75w_v8ls9a0 f1w7gpdv fez10in fg4l7m0"
+                                                                   fill="currentColor" aria-hidden="true" width="1em" height="1em" viewBox="0 0 20 20"
+                                                                   xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.18 2.11a.5.5 0 0 1 .54-.06l15 7.5a.5.5 0 0 1 0 .9l-15 7.5a.5.5 0 0 1-.7-.58L3.98 10 2.02 2.63a.5.5 0 0 1 .16-.52Zm2.7 8.39-1.61 6.06L16.38 10 3.27 3.44 4.88 9.5h6.62a.5.5 0 1 1 0 1H4.88Z"
+                  fill="currentColor"></path>
+        </svg></span>
     </div>
 </div>
 
 
 
-
-
 <script>
+
+initPage()
+function initPage(){
+        initClient();
+        renderChart();
+}
+
 // Clients
-    $.ajax
-        ({
-            url: "/api/Client",
-            dataType: "json",
-            type: "get",
-            data: {
-            },
-            success: function (res) {
-                $("#clientlist").empty();
-                res.map(x => $("#clientlist").append('<li><a class="dropdown-item" onclick=\'onClientClick("'+ x +'")\'>'+ x +'</a></li>'));
-            },
-            error: function (ex) {
-                alert('failed!');
-            },
-        });
+    function initClient(){
+        $.ajax
+            ({
+                url: "/api/Client",
+                dataType: "json",
+                type: "get",
+                data: {
+                },
+                success: function (res) {
+                    $("#clientlist").empty();
+                    res.map(x => $("#clientlist").append('<li><a class="dropdown-item" onclick=\'onClientClick("' + x + '")\'>' + x + '</a></li>'));
+                },
+                error: function (ex) {
+                    alert('failed!');
+                },
+            });
+    }
+    
     function onClientClick(client)
     {
         var clientText = $("#clientText").html();
@@ -190,7 +244,6 @@
             });
     }
 
-    
     function handleClick(evt, item, legend) {
         console.log(item)
     }
@@ -239,5 +292,7 @@
         };
         new Chart(ctxCom, config);
     }
-    renderChart();
+    
+
+
 </script>

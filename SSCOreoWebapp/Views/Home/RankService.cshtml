@@ -1,0 +1,298 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<style>
+    .dragContainer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .left-panel,
+    .right-panel {
+        width: 45%;
+        min-height: 300px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        overflow-y: auto;
+    }
+
+        .left-panel .serviceAmount{ display: none;}
+
+        .right-panel .serviceAmount {
+            display: block;
+        }
+    .item {
+        cursor: pointer;
+        padding: 5px;
+        margin: 5px;
+        border: 1px solid #ddd;
+        background-color: #f5f5f5;
+        text-align: center;
+    }
+
+    .item:hover {
+        background-color: #e0e0e0;
+    }
+
+    .right-panel {
+        background-color: #f0f0f0;
+    }
+
+    .right-panel .item {
+        background-color: #fff;
+    }
+</style>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <a class="btn btn-sm btn-outline-secondary dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false" id="clientText">ClientA</a>
+            <ul class="dropdown-menu" id="clientlist">
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container-fluid pb-3">
+    <div class="d-grid gap-3" style="grid-template-columns: 1fr 1fr;" id="chartZone">
+        <div class="bg-light border rounded-3" id="myPie">
+            <canvas id="pieChart" style="max-height: 400px;"></canvas>
+        </div>
+        <div class="bg-light border rounded-3" id="serviceRank">
+            <div class=" card">
+                <div class="card-header">
+                    Recommendation Service
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Service</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><i class="bi bi-icon-name"></i>
+                            </td>
+                            <td>Service 1</td>
+                            <td>1000</td>
+                        </tr>
+                        <tr>
+                            <td>Service 12</td>
+                            <td>玩家2</td>
+                            <td>900</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+                
+            </div>
+    </div>
+<div class=" card" style="margin-top:20px">
+    <div class="card-header">
+        What-if
+    </div>
+    <div class="card-body">
+            <div class="dragContainer">
+                <div class="left-panel">
+                </div>
+                <div class="right-panel">
+                    <!-- 右侧面板为空 -->
+                </div>
+            </div>
+            <div style="text-align: right">
+                <button class="btn btn-primary" type="button" style="margin-right: 1%" data-bs-toggle="modal" data-bs-target="#pieModal" onclick="calculateCustomizeService()">Generate Fee</button>
+            </div>
+
+            <div class="modal" id="pieModal">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-body" id="myCustomizePieChart">
+                            <canvas id="customizePieChart" style="max-height: 400px;"></canvas>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+        
+    </div>
+<div class="container-fluid" style="margin-top:20px">
+        <div class="row" style="text-align: center;">
+            <div class="col-4" style="height: min-content;margin-top:20px">
+                <div class="card card-h-100">
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12">
+                                    <h4 class="header-title mb-3">
+                                        <input class="form-check-input" type="checkbox" value="" data-service="service1" style="margin-right: 10px;margin-top: 2px;">
+                                        Top 1 - Service1
+                                    </h4>
+                                    <div class="table-responsive">
+                                        <table id="" class="myTable table mb-0 sortable">
+                                            <thead>
+                                            <tr>
+                                                <th>Place</th>
+                                                <td>Portfolio Name</td>
+                                                <td>Percentage</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody align="center">
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Portfolio1</td>
+                                                <td>25</td>
+                                            </tr>
+                                            <tr >
+                                                <td>2</td>
+                                                <td>Portfolio2</td>
+                                                <td>25</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4" style="height: min-content;margin-top:20px">
+                <div class="card card-h-100">
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12">
+                                    <h4 class="header-title mb-3">
+                                        <input class="form-check-input" type="checkbox" value="" data-service="service2" style="margin-right: 10px;margin-top: 2px;">
+                                        Top 2 - Service2
+                                    </h4>
+                                    <div class="table-responsive">
+                                        <table id="" class="myTable table mb-0 sortable">
+                                            <thead>
+                                            <tr>
+                                                <th>Place</th>
+                                                <td>Portfolio Name</td>
+                                                <td>Percentage</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody align="center">
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Portfolio1</td>
+                                                <td>25</td>
+                                            </tr>
+                                            <tr >
+                                                <td>2</td>
+                                                <td>Portfolio2</td>
+                                                <td>25</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4" style="height: min-content;margin-top:20px">
+                <div class="card card-h-100">
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12">
+                                    <h4 class="header-title mb-3">
+                                        <input class="form-check-input" type="checkbox" value="" data-service="service3" style="margin-right: 10px;margin-top: 2px;">
+                                        Top 3 - Service2
+                                    </h4>
+                                    <div class="table-responsive">
+                                        <table id="" class="myTable table mb-0 sortable">
+                                            <thead>
+                                            <tr>
+                                                <th>Place</th>
+                                                <td>Portfolio Name</td>
+                                                <td>Percentage</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody align="center">
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Portfolio1</td>
+                                                <td>25</td>
+                                            </tr>
+                                            <tr >
+                                                <td>2</td>
+                                                <td>Portfolio2</td>
+                                                <td>25</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4" style="height: min-content;margin-top:20px">
+                <div class="card card-h-100">
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12">
+                                    <h4 class="header-title mb-3">
+                                        <input class="form-check-input" type="checkbox" value="" data-service="service4" style="margin-right: 10px;margin-top: 2px;">
+                                        Top 4 - Service2
+                                    </h4>
+                                    <div class="table-responsive">
+                                        <table id="" class="myTable table mb-0 sortable">
+                                            <thead>
+                                            <tr>
+                                                <th>Place</th>
+                                                <td>Portfolio Name</td>
+                                                <td>Percentage</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody align="center">
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Portfolio1</td>
+                                                <td>25</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Portfolio2</td>
+                                                <td>25</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/randerservice.js"></script>
+
+<script>
+
+    
+</script>
+

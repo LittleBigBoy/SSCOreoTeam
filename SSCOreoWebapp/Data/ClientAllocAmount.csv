@@ -1,0 +1,8 @@
+Client,Service,AllocAmount
+ClientA,Equilties I,20
+ClientA,Bonds I,15
+ClientB,Equilties II,23
+ClientB,Bonds I,45
+ClientC,Bonds I,66
+ClientC,Equilties I,12
+ClientD,Equilties I,12
