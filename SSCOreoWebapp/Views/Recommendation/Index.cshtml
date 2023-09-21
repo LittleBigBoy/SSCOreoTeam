@@ -7,7 +7,7 @@
 <link href="~/css/commoncss.css" rel="stylesheet" />
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Recommendation Chat</h1>
+    <h1 class="h2">Recommendation</h1>
     
 </div>
 
@@ -23,7 +23,6 @@
                 </div>
                 <div class="_chatMessageStream_onjb8_68" role="log" style="margin-bottom: 0px; display: none" id="chatpart">
                     
-                    <div></div>
                 </div>
 
                 <div class="ms-Stack _chatInput_onjb8_137">
@@ -54,6 +53,20 @@
         </div>
     </div>
 </div>
+
+<div class="modal " id="chatModal">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-body" id="myPortfolioChart">
+                <canvas id="portfolioChart" style="max-height: 400px;"></canvas>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $("#TextField21").on("input", function (e) {
         $("#TextField21").val($("#TextField21").val().replace(/[\r\n]/g, ""));
@@ -97,7 +110,18 @@
                     q: query
                 },
                 success: function (res) {
-                    $("#chatpart").append('<div class="_chatMessageError_onjb8_110"><span class= "_chatMessageErrorContent_onjb8_125">' + res.data + '</span></div>');
+                    console.log(res);
+                    var data = res.data;
+                    var htmlStr = '<div class="_chatMessageError_onjb8_110">' + '<span class="_chatMessageErrorContent_onjb8_125">' + data.tittle + '</span>';
+                    if (data.portfolioNames != null && data.portfolioNames.length > 0) {
+                        data.portfolioNames.map((element, index) => {
+                            /* … */ 
+                            htmlStr += '<a class="_chatMessageErrorContent_onjb8_125" data-portfoliotype="' + data.portfolioType + '" data-portfolioname="' + element + '" data-assettype="'+ data.assetType +'" data-bs-toggle="modal" data-bs-target="#chatModal" onClick="LineChat(this)">' + (index + 1) + '. ' + element + '</a>';
+                        
+                        })
+                    }
+                    htmlStr +='</div>' 
+                    $("#chatpart").append(htmlStr);
                     $("#TextField21").removeAttr("disabled");
                 },
                 error: function (ex) {
@@ -105,6 +129,60 @@
                 },
             });
     }
+    function LineChat(e){
+        console.log(e);
+        $("#myPortfolioChart").empty();
+        $("#myPortfolioChart").append(' <canvas id="portfolioChart" style="max-height: 400px;"></canvas>')
+        var dataType = $(e).data("portfoliotype");
+        var portfolioName = $(e).data("portfolioname");
+        var assetType = $(e).data("assettype");
+        $.ajax({
+            url: "/api/Portfolio/name/" + portfolioName + "/dataType/" + dataType + "",
+            dataType: "json",
+            type: "get",
+            data: {
+            },
+            success: function (res) {
+                console.log(res);
+                var labels = res.map(x => x.asOf);
+                var dataData = assetType == "return" ? res.map(x => x.return) : res.map(x => x.nav);
+                var title = portfolioName;
+                const ctxCom = document.getElementById("portfolioChart");
+                const data = {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: dataType,
+                            data: dataData,
+                            borderColor: Samples.utils.CHART_COLORS.blue,
+                            backgroundColor: Samples.utils.CHART_COLORS.blue,
+                            pointStyle: false,
+                            cubicInterpolationMode: 'monotone',
+                            pointRadius: 10,
+                            pointHoverRadius: 15
+                        }
+                    ]
+                };
+                const config = {
+                    type: 'line',
+                    data: data,
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: title,
+                            }
+                        }
+                    }
+                };
+                new Chart(ctxCom, config);
 
-
+            },
+            error: function (ex) {
+                alert('failed!');
+            }
+        })
+        
+    }
 </script>

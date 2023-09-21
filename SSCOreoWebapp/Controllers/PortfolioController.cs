@@ -6,16 +6,16 @@ namespace SSCOreoWebapp.Controllers
     [Route("api/[controller]")]
     public class PortfolioController : Controller
     {
-        private readonly  ICsvReadService _csvReadService;
-        public PortfolioController(ICsvReadService csvReadService)
+        private readonly IPortfolioService _portfolioService;
+        public PortfolioController(IPortfolioService portfolioService)
         {
-            _csvReadService = csvReadService;
+            _portfolioService = portfolioService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetHistoryPortfolio()
+        [HttpGet("name/{portfolioName}/dataType/{dataType}")]
+        public async Task<IActionResult> GetHistoryPortfolio(string portfolioName, string dataType)
         {
-            return Ok(await _csvReadService.GetCsvData());
+            return Ok(_portfolioService.GetPortfolioData(portfolioName));
         }
     }
 }

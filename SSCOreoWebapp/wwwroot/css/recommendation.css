@@ -78,11 +78,18 @@
     margin-top: 24px;
 }
 
-._chatMessageUser_onjb8_80 {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 12px;
-}
+    ._chatMessageStream_onjb8_68 > div ::after {
+        content: '';
+        display: block;
+        min-height: 1px;
+    }
+
+    ._chatMessageUser_onjb8_80 {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 12px;
+        margin-top: 12px;
+    }
 
 ._chatMessageUserMessage_onjb8_86 {
     padding: 20px;
