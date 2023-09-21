@@ -44,5 +44,19 @@ namespace SSCOreoWebapp.Service.Service
                 }
             }
         }
+
+        public IEnumerable<PortfolioData> GetPortfolioData(string portfolioName, DateTime? startDate=null, DateTime? endDate=null)
+        {
+            startDate = startDate ?? new DateTime(1970, 01, 01);
+            endDate = endDate ?? DateTime.Now;
+            var portfolioHistoryFilePath = _configuration["AppSettings:PortfolioHistoryFilePath"];
+            var portfolioHistorySourceData =
+                _csvReadService.GetCsvData<PortfolioHistoryModel>("PortfolioHistoryFileData", portfolioHistoryFilePath);
+            var portfolioData = portfolioHistorySourceData.Where(p =>
+                    p.Portfolio == portfolioName && p.AsOf > startDate && p.AsOf <= endDate)
+                .OrderBy(p => p.AsOf).Select(p => new PortfolioData()
+                    { NAV = p.NAV, Return = p.Return, AsOf = p.AsOf.ToString("yyyy-MM-dd") });
+            return portfolioData;
+        }
     }
 }

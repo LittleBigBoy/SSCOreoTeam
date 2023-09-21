@@ -1,24 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SSCOreoWebapp.Service.Interface;
 
 namespace SSCOreoWebapp.Controllers
 {
     [Route("api/[controller]")]
     public class ChatController : Controller
     {
+        private readonly IConversationService _conversationService;
+        public ChatController(IConversationService conversationService)
+        {
+            _conversationService = conversationService;
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAnswer(string q)
         {
-            var a = "Thanks for your question, I am learning now!";
-            if (q.Contains("return"))
-            {
-                a = "After analysis, the return of portfolio A will be 10%";
-            }
-            else if (q.Contains("ratio"))
-            {
-                a = "After analysis, the ratio of portfolio A meet your requirement";
-            }
-
-            return Ok(new { data = a });
+            var answer = await _conversationService.GetAnswerAsync(q);
+            return Ok(new { data = answer });
         }
+
+
     }
 }

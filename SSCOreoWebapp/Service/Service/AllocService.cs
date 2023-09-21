@@ -32,17 +32,12 @@ namespace SSCOreoWebapp.Service.Service
             var clientAllocs = clientAllocSourceData
                 .Where(p => string.Equals(p.Client, client, StringComparison.CurrentCultureIgnoreCase) &&
                             p.AsOf >= startDate && p.AsOf <= endDate);
-            var portfolioHistoryFilePath = _configuration["AppSettings:PortfolioHistoryFilePath"];
-            var portfolioHistorySourceData =
-                _csvReadService.GetCsvData<PortfolioHistoryModel>("PortfolioHistoryFileData", portfolioHistoryFilePath);
+            
             var result = new List<ClientPortfoliosResponse>();
             foreach (var clientAllocModel in clientAllocs)
             {
                 var item = new ClientPortfoliosResponse() { PortfolioName = clientAllocModel.Portfolio };
-                var portfolioData = portfolioHistorySourceData.Where(p =>
-                        p.Portfolio == clientAllocModel.Portfolio && p.AsOf > startDate && p.AsOf <= endDate)
-                    .OrderBy(p => p.AsOf).Select(p => new PortfolioData()
-                        { NAV = p.NAV, Return = p.Return, AsOf = p.AsOf.ToString("yyyy-MM-dd") });
+                var portfolioData = _portfolioService.GetPortfolioData(clientAllocModel.Portfolio, startDate.Value, endDate.Value);
                 if (frequence == "Prediction 6 month")
                 {
                     var nav = new List<PortfolioData>();

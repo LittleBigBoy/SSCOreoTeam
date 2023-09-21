@@ -15,6 +15,7 @@ builder.Services.AddTransient<ICsvReadService, CsvReadService>();
 builder.Services.AddTransient<IClientService, ClientService>();
 builder.Services.AddTransient<IPortfolioService, PortfolioService>();
 builder.Services.AddTransient<IAllocService, AllocService>();
+builder.Services.AddTransient<IConversationService, ConversationService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
