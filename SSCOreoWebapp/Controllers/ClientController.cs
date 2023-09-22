@@ -36,5 +36,10 @@ namespace SSCOreoWebapp.Controllers
         {
             return Ok(await _allocService.GetClientPortfolios(client, frequence));
         }
+        [HttpGet("{clientName}/PredictedNetIncome")]
+        public async Task<IActionResult> GetPredictedNetIncome(string clientName)
+        {
+            return Ok(await _clientService.GetPredictedNetIncome(clientName));
+        }
     }
 }

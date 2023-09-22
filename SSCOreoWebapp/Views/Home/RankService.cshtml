@@ -57,7 +57,7 @@
         </div>
     </div>
 </div>
-<div class="container-fluid pb-3">
+@*<div class="container-fluid pb-3">*@
     <div class="d-grid gap-3" style="grid-template-columns: 1fr 1fr;" id="chartZone">
         <div class="bg-light border rounded-3" id="myPie">
             <canvas id="pieChart" style="max-height: 400px;"></canvas>
@@ -76,27 +76,27 @@
                             <th>Description</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
+                        <tbody id="recommendationServices">
+                        <tr >
                             <td>
                                 <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
                                 <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
                                 <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
                                 <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
-                                    <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
                             </td>
                             <td>Service 13</td>
-                                <td>Service 13</td>
+                            <td>Service 13</td>
                         </tr>
                         <tr>
                             <td>
                                 <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
                                 <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
                                 <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
-                                    <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
                             </td>
                             <td>Service 21</td>
-                                <td>Service 21</td>
+                            <td>Service 21</td>
                         </tr>
                         <tr>
                             <td>
@@ -128,15 +128,15 @@
                             <td>Service 58</td>
                             <td>Service 58</td>
                         </tr>
-                            <tr>
-                                <td>
-                                    <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
-                                    <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
-                                    <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
-                                </td>
-                                <td>Service 74</td>
-                                <td>Service 74</td>
-                            </tr>
+                        <tr>
+                            <td>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                            </td>
+                            <td>Service 74</td>
+                            <td>Service 74</td>
+                        </tr>
                         <tr>
                             <td>
                                 <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
@@ -155,11 +155,46 @@
                         </tbody>
                     </table>
                 </div>
-                </div>
-                
             </div>
+                
+        </div>
     </div>
-<div class=" card" style="margin-top:20px">
+    <div class=" card" style="margin-top:20px">
+        <div class="card-header">
+            Client Predicted NetIncome
+        </div>
+        <div class="card-body">
+            <div class="row align-items-start">
+                <div class="col">
+                    <label>AnnualFeeRate:</label>
+                    <span id="AnnualFeeRate">1.7</span>
+                </div>
+                <div class="col">
+                    <label>TotalServiceFee:</label>
+                    <span id="TotalServiceFee">3099877.94</span>
+                </div>
+                <div class="col">
+                    <label>TotalServiceCost:</label>
+                    <span id="TotalServiceCost">1185247.45</span>
+                </div>
+            </div>
+            <div class="row align-items-start" style="margin-top: 20px">
+                <div class="col">
+                    <label>ProfitMargin:</label>
+                    <span id="ProfitMargin">61.76</span>
+                </div>
+                <div class="col">
+                    <label>NetIncome:</label>
+                    <span id="NetIncome">1914630.49</span>
+                </div>
+                <div class="col">
+                    <label>Predicted NetIncome:</label>
+                    <span id="PredictedNetIncome">1915143.09</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" card" style="margin-top:20px">
     <div class="card-header">
         What-if
     </div>
@@ -190,7 +225,7 @@
     </div>
         
     </div>
-</div>
+@*</div>*@
 <script src="~/js/randerservice.js"></script>
 
 <script>

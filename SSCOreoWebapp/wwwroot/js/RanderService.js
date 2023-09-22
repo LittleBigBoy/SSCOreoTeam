@@ -3,6 +3,8 @@ function initPage() {
     initClient();
     renderChart();
     initServices();
+    getPredictedNetIncome();
+    getRecommadationService();
 }
 
 // Clients
@@ -33,7 +35,6 @@ function renderChart() {
             data: {
             },
             success: function (res) {
-                console.log(res);
                 var labels = res.map(x => x.serviceName + "(" + x.percentage + ")");
                 var datas = res.map(x => x.amount)
                 /// pie
@@ -63,6 +64,8 @@ function onClientClick(client) {
     if (client !== clientText) {
         $("#clientText").html(client);
         renderChart();
+        getRecommadationService();
+        getPredictedNetIncome();
     }
 }
 function initServices() {
@@ -75,7 +78,7 @@ function initServices() {
             success: function (res) {
                 const leftPanel = document.querySelector(".left-panel");
                 res.map(x => {
-                    var html = `<div class="item row g-2">
+                    var html = `<div class="item row g-2" ondblclick=dblClickPanel(this)>
             <div class="col-auto">
                 <label for="${x.replace(/\s*/g, "")}" class="visually-hidden">${x}</label>
                 <input type="text" readonly class="form-control-plaintext" id="${x.replace(/\s*/g, "")}" value="${x}">
@@ -87,28 +90,22 @@ function initServices() {
         </div>`
                     $(leftPanel).append(html);
                 });
-                document.addEventListener("DOMContentLoaded", function () {
-                    const leftPanel = document.querySelector(".left-panel");
-                    const rightPanel = document.querySelector(".right-panel");
-
-                    const items = document.querySelectorAll(".item");
-
-                    items.forEach((item) => {
-                        item.addEventListener("dblclick", () => {
-                            if (item.parentElement === leftPanel) {
-                                rightPanel.appendChild(item);
-                            } else {
-                                leftPanel.appendChild(item);
-                            }
-                        });
-                    });
-                });
             },
             error: function (ex) {
                 alert('failed! exception: ' + ex);
             },
         });
 }
+function dblClickPanel(e) {
+    const leftPanel = document.querySelector(".left-panel");
+    const rightPanel = document.querySelector(".right-panel");
+    if (e.parentElement === leftPanel) {
+        rightPanel.appendChild(e);
+    } else {
+        leftPanel.appendChild(e);
+    }
+}
+
 function calculateCustomizeService() {
     const rightPanel = document.querySelector(".right-panel");
 
@@ -173,6 +170,97 @@ function calculateCustomizeService() {
             },
             error: function (ex) {
                 alert('failed! exception: ' + ex);
+            },
+        });
+}
+
+function getPredictedNetIncome() {
+    var client = $("#clientText").html();
+    $.ajax
+        ({
+            url: "/api/Client/" + client +"/PredictedNetIncome",
+            dataType: "json",
+            type: "get",
+            data: {
+            },
+            success: function (res) {
+                $("#AnnualFeeRate").html(res.annualFeeRate);
+                $("#TotalServiceFee").html(res.totalServiceFee);
+                $("#TotalServiceCost").html(res.totalServiceCost);
+                $("#ProfitMargin").html(res.profitMargin);
+                $("#NetIncome").html(res.netIncome);
+                $("#PredictedNetIncome").html(res.predictedNetIncome);
+            },
+            error: function (ex) {
+                alert('failed!');
+            },
+        });
+}
+
+function getRecommadationService() {
+    var client = $("#clientText").html();
+    $.ajax
+        ({
+            url: "/api/Service/client/" + client,
+            dataType: "json",
+            type: "get",
+            data: {
+            },
+            success: function (res) {
+                $("#recommendationServices").empty();
+                res.map(x => {
+                    var html = '<tr>';
+                    if (x.key <= 100) {
+                        html += `
+                            <td>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                            </td>
+                            `
+                    } else if (x.key <= 500) {
+                        html += `
+                            <td>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                            </td>
+                            `
+                    } else if (x.key <= 1000) {
+                        html += `
+                            <td>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                            </td>
+                            `
+                    } else if (x.key <= 1500) {
+                        html += `
+                            <td>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                            </td>
+                            `
+                    } else  {
+                        html += `
+                            <td>
+                                <i class="bi bi-star-fill" style="font-size: 15px; color: cornflowerblue;"></i>
+                            </td>
+                            `
+                    }
+
+
+                    html +=`<td>${x.value}</td>
+                            <td>Square difference:${x.key.toFixed(2) }</td>
+                        </tr>`
+                    $("#recommendationServices").append(html)
+                })
+            },
+            error: function (ex) {
+                alert('failed!');
             },
         });
 }

@@ -7,5 +7,6 @@ namespace SSCOreoWebapp.Service.Interface
         Task<IEnumerable<ClientPortfoliosResponse>> GetClientPortfolios(string client, string frequence, DateTime? startDate = null, DateTime? endDate = null);
         List<ClientServiceResponseModel> GetCustomizeService(List<ClientServiceResponseModel> serviceModels);
         List<string> GetAllServices();
+        Task<IEnumerable<KeyValuePair<double, string>>> GetServiceScore(string clientName);
     }
 }

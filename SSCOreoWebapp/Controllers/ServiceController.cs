@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc;
 using SSCOreoWebapp.Models;
 using SSCOreoWebapp.Service.Interface;
 using SSCOreoWebapp.Service.Service;
@@ -24,5 +25,13 @@ namespace SSCOreoWebapp.Controllers
         {
             return Ok(_allocService.GetAllServices());
         }
+
+        [HttpGet("client/{clientName}")]
+        public async Task<IActionResult> GetServiceScore(string clientName)
+        {
+            var data = await _allocService.GetServiceScore(clientName);
+            return Ok(data);
+        }
+
     }
 }

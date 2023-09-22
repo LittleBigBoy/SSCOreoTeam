@@ -121,49 +121,67 @@ namespace SSCOreoWebapp.Service.Service
             return sourceDatas.Select(p => p.Service).Distinct().ToList();
         }
 
-        private async Task GetPredictValue()
+        public async Task<IEnumerable<KeyValuePair<double,string>>> GetServiceScore(string clientName)
+        {
+
+            var clientProfilePath = _configuration["AppSettings:ClientProfileFilePath"];
+            var clientProfileDatas = _csvReadService.GetCsvData<ClientProfileModel>("ClientProfileFilePath", clientProfilePath);
+            var clientService = clientProfileDatas.FirstOrDefault(p => p.Client == clientName);
+            var serviceScore = await GetPredictValue(clientService);
+
+            var serviceProfilePath = _configuration["AppSettings:ServiceProfileFilePath"];
+            var sourceDatas = _csvReadService.GetCsvData<ServiceProfileModel>("ServiceProfileFilePath", serviceProfilePath);
+            var serviceDatas = new List<ClientServiceResponseModel>();
+            var scoreServicePairs = sourceDatas
+                .Select(p => new KeyValuePair<double, string>(Math.Abs(p.Score - serviceScore), p.Service))
+                .OrderBy(p => p.Key).Take(8).ToList();
+
+            return scoreServicePairs;
+        }
+
+        private async Task<double> GetPredictValue(ClientProfileModel clientProfile)
         {
             try
             {
                 var client = new HttpClient();
-                var requestBody = @"{
-    ""input_data"":{
+                var requestBody = $@"{{
+    ""input_data"":{{
     ""columns"":[
-        ""Service"",
-        ""Portfolio"",
-        ""AsOf""
+        ""RiskTolerance"",
+        ""Region"",
+        ""TotalInvestment"",
+""YearsOfInvestmentExperience""
         ],
-        ""index"":[],
-        ""data"":[[""Equilties I"",""Value Oriented"",""2823/9/1""]]
-        }
-    }";
-                const string apikey = "BWWg6NSyVSIifaqJEue79lTGDk1IA00C";
+        ""data"":[[""{clientProfile.RiskTolerance}"",""{clientProfile.Region}"",""{clientProfile.TotalInvestment}"",""{clientProfile.YearsOfInvestmentExperience}""]]
+        }}
+    }}";
+                var apikey = _configuration["AppSettings:ServiceModelKey"];
+                var endPoint = _configuration["AppSettings:ServiceModelEndPoint"];
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apikey);
-                client.BaseAddress = new Uri("https://oreo-ml-2023-port-prediction.eastasia.inference.ml.azure.com/score");
+                client.BaseAddress = new Uri(endPoint);
                 var content = new StringContent(requestBody);
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                content.Headers.Add("azureml-model-deployment", "portfoliopredictionmodel-1");
+                content.Headers.Add("azureml-model-deployment", "clientserviceallocmodel-1");
                 HttpResponseMessage reponse = await client.PostAsync("", content);
 
                 if (reponse.IsSuccessStatusCode)
                 {
                     string result = await reponse.Content.ReadAsStringAsync();
-                    Console.WriteLine(result);
+                    result = result.Replace("[", "").Replace("]", "");
+                    return double.Parse(result);
                 }
                 else
                 {
-                    Console.WriteLine(reponse.StatusCode);
-                    Console.WriteLine(reponse.Headers.ToString());
                     string reponsecontent = await reponse.Content.ReadAsStringAsync();
-                    Console.WriteLine(reponsecontent);
+                    return 0;
                 }
+                
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                throw e;
             }
-            
+
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using SSCOreoWebapp.Models;
 using SSCOreoWebapp.Service.Interface;
+using System.Net.Http.Headers;
 
 namespace SSCOreoWebapp.Service.Service
 {
@@ -59,6 +60,65 @@ namespace SSCOreoWebapp.Service.Service
                 serviceDatas.Add(serviceData);
             }
             return serviceDatas;
+        }
+
+        public async Task<PredictedNetIncomeModel> GetPredictedNetIncome(string clientName)
+        {
+            var clientProfilePath = _configuration["AppSettings:ClientProfileFilePath"];
+            var clientProfileDatas = _csvReadService.GetCsvData<ClientProfileModel>("ClientProfileFilePath", clientProfilePath);
+            var clientService = clientProfileDatas.FirstOrDefault(p => p.Client == clientName); 
+            return await GetPredictValue(clientService);
+        }
+
+        private async Task<PredictedNetIncomeModel> GetPredictValue(ClientProfileModel clientProfile)
+        {
+            var model = new PredictedNetIncomeModel();
+            try
+            {
+                var client = new HttpClient();
+                var requestBody = $@"{{
+    ""input_data"":{{
+    ""columns"":[
+        ""RiskTolerance"",
+        ""Region"",
+        ""TotalInvestment"",
+""YearsOfInvestmentExperience""
+        ],
+        ""data"":[[""{clientProfile.RiskTolerance}"",""{clientProfile.Region}"",""{clientProfile.TotalInvestment}"",""{clientProfile.YearsOfInvestmentExperience}""]]
+        }}
+    }}";
+                model.AnnualFeeRate = clientProfile.AnnualFeeRate;
+                model.TotalServiceFee = clientProfile.TotalServiceFee;
+                model.TotalServiceCost = clientProfile.TotalServiceCost;
+                model.ProfitMargin = clientProfile.ProfitMargin;
+                model.NetIncome = clientProfile.NetIncome;
+                var apikey = _configuration["AppSettings:ClientPortfolioModelKey"];
+                var endPoint = _configuration["AppSettings:ClientPortfolioModelEndPoint"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apikey);
+                client.BaseAddress = new Uri(endPoint);
+                var content = new StringContent(requestBody);
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                content.Headers.Add("azureml-model-deployment", "clientprofileautoallmodels-1");
+                HttpResponseMessage reponse = await client.PostAsync("", content);
+
+                if (reponse.IsSuccessStatusCode)
+                {
+                    string result = await reponse.Content.ReadAsStringAsync();
+                    result = result.Replace("[", "").Replace("]", "");
+                    model.PredictedNetIncome = Math.Round(double.Parse(result),2);
+                }
+                else
+                {
+                    model.PredictedNetIncome = 0;
+                }
+
+                return model;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
         }
     }
 }

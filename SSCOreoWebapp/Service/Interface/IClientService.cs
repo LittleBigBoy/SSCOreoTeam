@@ -7,5 +7,6 @@ namespace SSCOreoWebapp.Service.Interface
         Task<List<string>> GetClients();
         List<string> GetServiceClients();
         List<ClientServiceResponseModel> GetServicesByClientName(string clientName);
+        Task<PredictedNetIncomeModel> GetPredictedNetIncome(string clientName);
     }
 }
